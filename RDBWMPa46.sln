@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientQuestions", "ClientQu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QACombo", "QACombo\QACombo.csproj", "{C2C7B501-043C-41A8-ACF6-C153EBAC6942}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizService", "QuizService\QuizService.csproj", "{FDDE96B6-2753-49EC-B58C-7F854AB55A48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C2C7B501-043C-41A8-ACF6-C153EBAC6942}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2C7B501-043C-41A8-ACF6-C153EBAC6942}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2C7B501-043C-41A8-ACF6-C153EBAC6942}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDDE96B6-2753-49EC-B58C-7F854AB55A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDDE96B6-2753-49EC-B58C-7F854AB55A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDDE96B6-2753-49EC-B58C-7F854AB55A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDDE96B6-2753-49EC-B58C-7F854AB55A48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,8 @@
-﻿namespace QuizServer
+﻿namespace QuizService
 {
-    partial class Form1
+    partial class MattStevenQuizService
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
@@ -20,20 +20,21 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            // 
+            // MattStevenQuizService
+            // 
+            this.ServiceName = "MattStevenQuizService";
+
         }
 
         #endregion
     }
 }
-
