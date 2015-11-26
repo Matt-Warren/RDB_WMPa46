@@ -21,6 +21,8 @@ namespace QuizService
             public MyTimer rTimer;
             public MyTimer wTimer;
             public string userType;
+            public int question;
+            public string name;
         }
         EventLog eventLogger;
         List<ClientConnections> connections = new List<ClientConnections>();
@@ -56,8 +58,8 @@ namespace QuizService
         }
         private void readSocket(object obj)
         {
-            Byte[] bytes = new Byte[256];
-            byte[] objectBytes = new byte[16384];
+            Byte[] bytes = new Byte[8192];
+            byte[] objectBytes = new byte[8192];
             string data = null;
             ClientConnections connection = (ClientConnections)obj;
             // Get a stream object for reading and writing
