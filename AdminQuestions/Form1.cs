@@ -16,5 +16,15 @@ namespace AdminQuestions
         {
             InitializeComponent();
         }
+
+        private void btnEditQA_Click(object sender, EventArgs e)
+        {
+            pEditQA.Visible = true;
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            pEditQA.Visible = false;
+        }
     }
 }
