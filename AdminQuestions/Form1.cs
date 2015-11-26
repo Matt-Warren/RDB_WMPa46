@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QA;
+using ClientServerLibrary;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
+using ClientServerLibrary;
 
 namespace AdminQuestions
 {
@@ -274,6 +275,22 @@ namespace AdminQuestions
         private void btnExcelExport_Click(object sender, EventArgs e)
         {
             //get list of questions and such from the server
+            MemoryStream stream = new MemoryStream();
+            BinaryFormatter formatter = new BinaryFormatter();
+            try {
+                stream.Seek(0, SeekOrigin.Begin);
+                List<ExcelData> excelList = (List<ExcelData>)formatter.Deserialize(stream);
+
+
+
+
+
+            }
+            catch
+            {
+
+            }
+
         }
     }
 }
