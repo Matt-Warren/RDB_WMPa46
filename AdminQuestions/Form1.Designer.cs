@@ -55,8 +55,11 @@
             this.lbQuestions = new System.Windows.Forms.ListBox();
             this.pLeaderboard = new System.Windows.Forms.Panel();
             this.btnLeaderboardBack = new System.Windows.Forms.Button();
+            this.pStatus = new System.Windows.Forms.Panel();
+            this.btnStatusBack = new System.Windows.Forms.Button();
             this.pEditQA.SuspendLayout();
             this.pLeaderboard.SuspendLayout();
+            this.pStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnEditQA
@@ -330,22 +333,43 @@
             this.btnLeaderboardBack.UseVisualStyleBackColor = true;
             this.btnLeaderboardBack.Click += new System.EventHandler(this.btnLeaderboardBack_Click);
             // 
+            // pStatus
+            // 
+            this.pStatus.Controls.Add(this.btnStatusBack);
+            this.pStatus.Location = new System.Drawing.Point(12, 7);
+            this.pStatus.Name = "pStatus";
+            this.pStatus.Size = new System.Drawing.Size(568, 406);
+            this.pStatus.TabIndex = 21;
+            this.pStatus.Visible = false;
+            // 
+            // btnStatusBack
+            // 
+            this.btnStatusBack.Location = new System.Drawing.Point(488, 10);
+            this.btnStatusBack.Name = "btnStatusBack";
+            this.btnStatusBack.Size = new System.Drawing.Size(75, 23);
+            this.btnStatusBack.TabIndex = 0;
+            this.btnStatusBack.Text = "Back";
+            this.btnStatusBack.UseVisualStyleBackColor = true;
+            this.btnStatusBack.Click += new System.EventHandler(this.btnStatusBack_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 421);
+            this.Controls.Add(this.pStatus);
+            this.Controls.Add(this.pEditQA);
+            this.Controls.Add(this.pLeaderboard);
             this.Controls.Add(this.btnExcelExport);
             this.Controls.Add(this.btnLeaderboard);
             this.Controls.Add(this.btnStatus);
             this.Controls.Add(this.btnEditQA);
-            this.Controls.Add(this.pLeaderboard);
-            this.Controls.Add(this.pEditQA);
             this.Name = "mainForm";
             this.Text = "Admin";
             this.pEditQA.ResumeLayout(false);
             this.pEditQA.PerformLayout();
             this.pLeaderboard.ResumeLayout(false);
+            this.pStatus.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -379,6 +403,8 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Panel pLeaderboard;
         private System.Windows.Forms.Button btnLeaderboardBack;
+        private System.Windows.Forms.Panel pStatus;
+        private System.Windows.Forms.Button btnStatusBack;
     }
 }
 

@@ -276,7 +276,7 @@ namespace AdminQuestions
 
         private void btnStatus_Click(object sender, EventArgs e)
         {
-
+            pStatus.Visible = true;
         }
 
         private void btnExcelExport_Click(object sender, EventArgs e)
@@ -413,6 +413,11 @@ namespace AdminQuestions
                 }
             }
 
+        }
+
+        private void btnStatusBack_Click(object sender, EventArgs e)
+        {
+            pStatus.Visible = false;
         }
     }
 }
