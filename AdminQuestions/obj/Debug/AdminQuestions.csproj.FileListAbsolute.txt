@@ -22,3 +22,11 @@ C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\bi
 C:\Users\Steven johnston\Documents\SET2ndYear\Relational Databases\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.exe.config
 C:\Users\Steven johnston\Documents\SET2ndYear\Relational Databases\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.exe
 C:\Users\Steven johnston\Documents\SET2ndYear\Relational Databases\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.pdb
+C:\Users\sdjohnston\Desktop\repo\AdminQuestions\bin\Debug\AdminQuestions.exe.config
+C:\Users\sdjohnston\Desktop\repo\AdminQuestions\obj\Debug\AdminQuestions.csproj.ResolveComReference.cache
+C:\Users\sdjohnston\Desktop\repo\AdminQuestions\obj\Debug\AdminQuestions.exe
+C:\Users\sdjohnston\Desktop\repo\AdminQuestions\obj\Debug\AdminQuestions.pdb
+C:\Users\sdjohnston\Desktop\repo\AdminQuestions\obj\Debug\AdminQuestions.csprojResolveAssemblyReference.cache
+C:\Users\sdjohnston\Desktop\repo\AdminQuestions\obj\Debug\AdminQuestions.mainForm.resources
+C:\Users\sdjohnston\Desktop\repo\AdminQuestions\obj\Debug\AdminQuestions.Properties.Resources.resources
+C:\Users\sdjohnston\Desktop\repo\AdminQuestions\obj\Debug\AdminQuestions.csproj.GenerateResource.Cache

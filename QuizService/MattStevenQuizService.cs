@@ -60,7 +60,7 @@ namespace QuizService
         private void readSocket(object obj)
         {
             List<byte[]> listObject = new List<byte[]>();
-            Byte[] bytes = new Byte[8192];
+            byte[] bytes = new byte[8192];
             byte[] fullObjectBytes;// = new byte[8192];
             string data = null;
             ClientConnections connection = (ClientConnections)obj;
@@ -92,17 +92,31 @@ namespace QuizService
             object objFromClient = bformatter.Deserialize(fullObjectStream);
             Type objType = objFromClient.GetType();
 
+            byte[] objectOut;
+
             if (objType == typeof(String))
             {
-
+                bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();//binary 
+                bformatter.Serialize(fileOut, drawObjects);
+                objectOut = "Connected".ToCharArray().
+                string name = ((string)objFromClient);
+                connection.name = name;
+                switch (name.ToLower())
+                { 
+                    case "admin":
+                        break;
+                    default:
+                        break;
+                }
+                stream.Write(objectOut, 0, objectOut.Length);
             }
             else if (objType == typeof(Answer))
             {
             }
-            else if (objType == typeof())
+            else if (objType == typeof(CurrentStatus))
             {
             }
-            else if (objType == typeof())
+            else if (objType == typeof(Leaderboard))
             {
             }
             //fullObjectBytes = listObject.Join();
