@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientQuestions
+namespace QA
 {
+    [Serializable]
     public class QACombo
     {
+
         public string question { get; set; }
         public string ans1 { get; set; }
         public string ans2 { get; set; }
         public string ans3 { get; set; }
         public string ans4 { get; set; }
 
-        private int correctAnswer;
+        public int correctAnswer;
+
         public bool isSet;
         public QACombo()
         {
