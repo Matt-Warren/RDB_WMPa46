@@ -1,6 +1,6 @@
 ﻿namespace QuizService
 {
-    partial class Service1
+    partial class MattStevenQuizService
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            // 
+            // MattStevenQuizService
+            // 
+            this.ServiceName = "MattStevenQuizService";
+
         }
 
         #endregion
