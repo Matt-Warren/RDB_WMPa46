@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Answer.cs" />
     <Compile Include="CurrentStatus.cs" />
+    <Compile Include="ExcelData.cs" />
     <Compile Include="Leaderboard.cs" />
     <Compile Include="MyTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
