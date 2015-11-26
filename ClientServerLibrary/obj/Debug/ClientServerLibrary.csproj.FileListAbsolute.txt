@@ -1,0 +1,5 @@
+C:\Users\mwarren\Desktop\Git\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.dll
+C:\Users\mwarren\Desktop\Git\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.pdb
+C:\Users\mwarren\Desktop\Git\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.csprojResolveAssemblyReference.cache
+C:\Users\mwarren\Desktop\Git\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.dll
+C:\Users\mwarren\Desktop\Git\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.pdb
