@@ -11,6 +11,7 @@ using System.ServiceProcess;
 using ClientServerLibrary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace QuizService
 {
@@ -86,7 +87,7 @@ namespace QuizService
                 //stream.Write(msg, 0, msg.Length);
                 //Console.WriteLine("Sent: {0}", data);
             }
-            var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            var bformatter = new BinaryFormatter();
             fullObjectBytes = listObject.ToArray().Cast<Byte>().ToArray();
             Stream fullObjectStream = new MemoryStream(fullObjectBytes);
             object objFromClient = bformatter.Deserialize(fullObjectStream);
@@ -96,28 +97,32 @@ namespace QuizService
 
             if (objType == typeof(String))
             {
-                bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();//binary 
-                bformatter.Serialize(fileOut, drawObjects);
-                objectOut = "Connected".ToCharArray().
-                string name = ((string)objFromClient);
-                connection.name = name;
-                switch (name.ToLower())
-                { 
-                    case "admin":
-                        break;
-                    default:
-                        break;
-                }
+
+                connection.name  = ((string)objFromClient);
+                objectOut = ObjectToByteArray("Connected");
                 stream.Write(objectOut, 0, objectOut.Length);
             }
             else if (objType == typeof(Answer))
             {
+
             }
             else if (objType == typeof(CurrentStatus))
             {
             }
             else if (objType == typeof(Leaderboard))
             {
+            }
+            else if(objType == typeof(List<QACombo>))
+            {
+            
+            }
+            else if(objType == typeof(List<ExcelData>))
+            {
+            
+            }
+            else if(objType == typeof(List<int>))
+            {
+            
             }
             //fullObjectBytes = listObject.Join();
 
@@ -204,6 +209,15 @@ namespace QuizService
 
             Console.WriteLine("\nHit enter to continue...");
             Console.Read();
+        }
+        public static byte[] ObjectToByteArray(Object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
         }
     }
 }
