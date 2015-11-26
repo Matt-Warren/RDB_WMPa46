@@ -11,3 +11,11 @@ C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\Ad
 C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.exe.config
 C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.exe
 C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.pdb
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.exe
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.pdb
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.csprojResolveAssemblyReference.cache
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.mainForm.resources
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.Properties.Resources.resources
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.csproj.GenerateResource.Cache
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\bin\Debug\QACombo.dll
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\AdminQuestions\bin\Debug\QACombo.pdb

@@ -7,3 +7,14 @@ C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuesti
 C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\obj\Debug\ClientQuestions.csproj.GenerateResource.Cache
 C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\obj\Debug\ClientQuestions.exe
 C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\obj\Debug\ClientQuestions.pdb
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\bin\Debug\ClientQuestions.exe.config
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.exe
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.pdb
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\bin\Debug\ClientQuestions.exe
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\bin\Debug\ClientQuestions.pdb
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\bin\Debug\QACombo.dll
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\bin\Debug\QACombo.pdb
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.csprojResolveAssemblyReference.cache
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.mainForm.resources
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.Properties.Resources.resources
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.csproj.GenerateResource.Cache
