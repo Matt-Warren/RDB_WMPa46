@@ -77,6 +77,7 @@
             this.btnStatus.TabIndex = 1;
             this.btnStatus.Text = "View User Status";
             this.btnStatus.UseVisualStyleBackColor = true;
+            this.btnStatus.Click += new System.EventHandler(this.btnStatus_Click);
             // 
             // btnLeaderboard
             // 
@@ -96,6 +97,7 @@
             this.btnExcelExport.TabIndex = 3;
             this.btnExcelExport.Text = "Create Excel Spreadsheet";
             this.btnExcelExport.UseVisualStyleBackColor = true;
+            this.btnExcelExport.Click += new System.EventHandler(this.btnExcelExport_Click);
             // 
             // pEditQA
             // 

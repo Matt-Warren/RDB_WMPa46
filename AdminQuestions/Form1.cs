@@ -265,5 +265,15 @@ namespace AdminQuestions
         {
             pLeaderboard.Visible = false;
         }
+
+        private void btnStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExcelExport_Click(object sender, EventArgs e)
+        {
+            //get list of questions and such from the server
+        }
     }
 }
