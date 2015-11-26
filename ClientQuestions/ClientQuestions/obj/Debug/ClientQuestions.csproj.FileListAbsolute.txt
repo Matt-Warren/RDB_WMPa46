@@ -1,0 +1,9 @@
+c:\users\matt\documents\visual studio 2015\Projects\ClientQuestions\ClientQuestions\bin\Debug\ClientQuestions.exe.config
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\bin\Debug\ClientQuestions.exe
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\bin\Debug\ClientQuestions.pdb
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\obj\Debug\ClientQuestions.csprojResolveAssemblyReference.cache
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\obj\Debug\ClientQuestions.mainForm.resources
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\obj\Debug\ClientQuestions.Properties.Resources.resources
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\obj\Debug\ClientQuestions.csproj.GenerateResource.Cache
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\obj\Debug\ClientQuestions.exe
+C:\Users\Matt\Documents\Visual Studio 2015\Projects\ClientQuestions\ClientQuestions\obj\Debug\ClientQuestions.pdb
