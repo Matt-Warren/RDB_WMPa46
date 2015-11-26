@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.ServiceProcess;
+using ClientServerLibrary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,8 +59,9 @@ namespace QuizService
         }
         private void readSocket(object obj)
         {
+            List<byte[]> listObject = new List<byte[]>();
             Byte[] bytes = new Byte[8192];
-            byte[] objectBytes = new byte[8192];
+            byte[] fullObjectBytes;// = new byte[8192];
             string data = null;
             ClientConnections connection = (ClientConnections)obj;
             // Get a stream object for reading and writing
@@ -70,9 +72,9 @@ namespace QuizService
             // Loop to receive all the data sent by the client.
             while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
             {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                 // Translate data bytes to a ASCII string.
-                data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                listObject.Add(bytes);
+                //data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                 //Console.WriteLine("Received: {0}", data);
 
                 // Process the data sent by the client.
@@ -84,6 +86,27 @@ namespace QuizService
                 //stream.Write(msg, 0, msg.Length);
                 //Console.WriteLine("Sent: {0}", data);
             }
+            var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            fullObjectBytes = listObject.ToArray().Cast<Byte>().ToArray();
+            Stream fullObjectStream = new MemoryStream(fullObjectBytes);
+            object objFromClient = bformatter.Deserialize(fullObjectStream);
+            Type objType = objFromClient.GetType();
+
+            if (objType == typeof(String))
+            {
+
+            }
+            else if (objType == typeof(Answer))
+            {
+            }
+            else if (objType == typeof())
+            {
+            }
+            else if (objType == typeof())
+            {
+            }
+            //fullObjectBytes = listObject.Join();
+
             ////////////////////////////////////////////////////////////////////////////////////////////data = string recived
         }
         private void writeSocket(object obj)

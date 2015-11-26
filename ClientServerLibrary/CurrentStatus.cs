@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClientServerLibrary
 {
-    class CurrentStatus
+    public class CurrentStatus
     {
     }
 }

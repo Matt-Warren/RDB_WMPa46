@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClientServerLibrary
 {
-    class Answer
+    public class Answer
     {
     }
 }

@@ -12,9 +12,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace QuizService
+namespace ClientServerLibrary
 {
-    class MyTimer
+    public class MyTimer
     {
         /// <summary>
         /// delegete to define how the function is called
