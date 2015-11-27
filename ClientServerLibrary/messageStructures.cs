@@ -10,6 +10,7 @@ namespace ClientServerLibrary
     {
         public int question;
         public int answer;
+        public int timeLeft;
     }
     public struct CurrentStatus
     {
