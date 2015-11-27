@@ -142,8 +142,6 @@ namespace AdminQuestions
 
             try
             {
-                Int32 port = Convert.ToInt32(portStr);
-                server = new TcpClient(serverIP, port);
 
                 Byte[] data = ObjectToByteArray(new List<QACombo>());
 
@@ -200,8 +198,6 @@ namespace AdminQuestions
         {
             try //to send the QACombo list back to the server
             { 
-                Int32 port = Convert.ToInt32(portStr);
-                server = new TcpClient(serverIP, port);
 
                 Byte[] data = ObjectToByteArray(questionsList);
 
@@ -412,8 +408,7 @@ namespace AdminQuestions
             List<Leaderboard> currLeaderList = new List<Leaderboard>();
             try
             {
-                Int32 port = Convert.ToInt32(portStr);
-                server = new TcpClient(serverIP, port);
+                
 
                 Byte[] data = ObjectToByteArray(new Leaderboard());
 
@@ -481,8 +476,6 @@ namespace AdminQuestions
             List<CurrentStatus> currStatList = new List<CurrentStatus>(); //put statuss in here
             try
             {
-                Int32 port = Convert.ToInt32(portStr);
-                server = new TcpClient(serverIP, port);
 
                 Byte[] data = ObjectToByteArray(new CurrentStatus());
 
@@ -536,8 +529,6 @@ namespace AdminQuestions
             List<ExcelData> excelList = new List<ExcelData>(); //store the list of excel data in here
             try
             {
-                Int32 port = Convert.ToInt32(portStr);
-                server = new TcpClient(serverIP, port);
 
                 Byte[] data = ObjectToByteArray(new ExcelData());
 
