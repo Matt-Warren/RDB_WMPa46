@@ -223,7 +223,7 @@
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(130, 20);
             this.txtServer.TabIndex = 1;
-            this.txtServer.Text = "127.0.0.1";
+            this.txtServer.Text = "142.156.111.122";
             // 
             // txtUsername
             // 

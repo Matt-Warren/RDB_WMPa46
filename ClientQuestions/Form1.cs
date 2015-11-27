@@ -63,7 +63,7 @@ namespace ClientQuestions
                 listObject.Add(bytes);
 
                 var bformatter = new BinaryFormatter();
-                fullObjectBytes = listObject.ToArray().Cast<Byte>().ToArray();
+                fullObjectBytes = bytes;
                 Stream fullObjectStream = new MemoryStream(fullObjectBytes);
                 object objFromClient = bformatter.Deserialize(fullObjectStream);
                 Type objType = objFromClient.GetType();
