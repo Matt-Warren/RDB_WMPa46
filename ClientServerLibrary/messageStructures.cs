@@ -24,4 +24,12 @@ namespace ClientServerLibrary
         public int score;
 
     }
+
+    public struct Result
+    {
+        public int questionNumber;
+        public string question;
+        public string actualAnswer;
+        public string theirAnswer;
+    }
 }
