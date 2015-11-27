@@ -1,0 +1,4 @@
+C:\Users\sdjohnston\Desktop\repo\QuizService\obj\Debug\QuizService.csprojResolveAssemblyReference.cache
+C:\Users\sdjohnston\Desktop\repo\QuizService\obj\Debug\QuizService.MattStevenQuizService.resources
+C:\Users\sdjohnston\Desktop\repo\QuizService\obj\Debug\QuizService.csproj.GenerateResource.Cache
+C:\Users\sdjohnston\Desktop\repo\QuizService\bin\Debug\QuizService.exe.config
