@@ -14,12 +14,18 @@ namespace QuizService
         /// </summary>
         static void Main()
         {
+#if DEBUG
+            MattStevenQuizService myservice = new MattStevenQuizService();
+            myservice.start();
+#else
+
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
                 new MattStevenQuizService()
             };
             ServiceBase.Run(ServicesToRun);
+#endif
 
         }
     }

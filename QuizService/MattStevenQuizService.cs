@@ -9,7 +9,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceProcess;
 using ClientServerLibrary;
-using ClientServerLibrary.messageStructures;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -34,6 +33,10 @@ namespace QuizService
         {
             InitializeComponent();
 
+        }
+        public void start()
+        {
+            OnStart(null);
         }
         protected override void OnStart(string[] args)
         {
@@ -72,10 +75,11 @@ namespace QuizService
             int i;
 
             // Loop to receive all the data sent by the client.
-            while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
-            {
+            //while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+            //{
+            stream.Read(bytes, 0, bytes.Length);
                 // Translate data bytes to a ASCII string.
-                listObject.Add(bytes);
+            listObject.Add(bytes);
                 //data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                 //Console.WriteLine("Received: {0}", data);
 
@@ -87,9 +91,10 @@ namespace QuizService
                 // Send back a response.
                 //stream.Write(msg, 0, msg.Length);
                 //Console.WriteLine("Sent: {0}", data);
-            }
+            //}
             var bformatter = new BinaryFormatter();
-            fullObjectBytes = listObject.ToArray().Cast<Byte>().ToArray();
+            //fullObjectBytes = listObject.ToArray().Cast<Byte>().ToArray();
+            fullObjectBytes = bytes;
             Stream fullObjectStream = new MemoryStream(fullObjectBytes);
             object objFromClient = bformatter.Deserialize(fullObjectStream);
             Type objType = objFromClient.GetType();
@@ -220,7 +225,7 @@ namespace QuizService
                     //}
 
                     // Shutdown and end connection
-                    client.Close();
+                    //client.Close();
                 }
             }
             catch (SocketException e)

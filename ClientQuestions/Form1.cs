@@ -59,10 +59,8 @@ namespace ClientQuestions
                 int i;
 
                 // Loop to receive all the data sent by the client.
-                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
-                {
-                    listObject.Add(bytes);
-                }
+                stream.Read(bytes, 0, bytes.Length);
+                listObject.Add(bytes);
 
                 var bformatter = new BinaryFormatter();
                 fullObjectBytes = listObject.ToArray().Cast<Byte>().ToArray();
@@ -205,7 +203,8 @@ namespace ClientQuestions
                 server = txtServer.Text;
                 name = txtUsername.Text;
                 pStartScreen.Visible = false;
-                GetNextQuestion();
+                connectToServer();
+                //GetNextQuestion();
             }
         }
         public static byte[] ObjectToByteArray(Object obj)
