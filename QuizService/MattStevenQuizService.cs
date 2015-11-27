@@ -22,8 +22,6 @@ namespace QuizService
         {
             public TcpClient cSocket;
             public MyTimer rTimer;
-            public MyTimer wTimer;
-            public string userType;
             public int question;
             public int score;
             public string name;
@@ -170,16 +168,17 @@ namespace QuizService
                 leaderBoard.OrderBy(o => o.score).ToList();
                 objectOut = ObjectToByteArray(leaderBoard);
             }
-            else if (objType == typeof(List<ExcelData>))
+            else if (objType == typeof(ExcelData))
             {
-                /*List<ExcelData> excelDataList = new List<ExcelData>();
-                db.Select("Select * from questionattempts");
-                List<List<string>> thisQuestion = db.Select("Select * from questions");
-                foreach (List<string> record in thisQuestion)
+                List<ExcelData> excelDataList = new List<ExcelData>();
+                List<List<string>> excelRecords = db.Select("Select questionId, timeLeft from questionattempts");
+                List<List<string>> questionData = db.Select("Select questionNum, question from questions");
+                foreach (List<string> questionRecord in questionData)
                 {
-                    send.Add(new QACombo(String.Join("|", thisQuestion.Skip(1))));
+                    excelDataList.Add(new ExcelData(Convert.ToInt16(questionRecord[0]), questionRecord[1],((IEnumerable<int>)(from excelRecord in excelRecords where excelRecord[0] == questionRecord[0] select Convert.ToInt16(excelRecord[1]))).Average(),
+                       ((double)excelRecords.Select(o => o[0] == questionRecord[0] && o[1] != "0").Count())/ excelRecords.Count()));
                 }
-                objectOut = ObjectToByteArray(send);*/
+                objectOut = ObjectToByteArray(excelDataList);
             }
             
             else if (objType == typeof(List<QACombo>))
