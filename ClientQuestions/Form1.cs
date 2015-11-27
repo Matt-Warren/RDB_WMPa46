@@ -20,9 +20,10 @@ namespace ClientQuestions
         public string name;
         public string server;
         public string portStr;
+        public int questionNumber;
 
         NetworkStream stream;
-
+        TcpClient client;
         enum checkBoxes{
             ANS_ONE = 1,
             ANS_TWO,
@@ -43,7 +44,7 @@ namespace ClientQuestions
             try
             {
                 Int32 port = Convert.ToInt32(portStr);
-                TcpClient client = new TcpClient(server, port);
+                client = new TcpClient(server, port);
 
                 Byte[] data = ObjectToByteArray(name);
 
@@ -55,9 +56,7 @@ namespace ClientQuestions
                 List<byte[]> listObject = new List<byte[]>();
                 byte[] bytes = new byte[8192];
                 byte[] fullObjectBytes;// = new byte[8192];
-
-                int i;
-
+                
                 // Loop to receive all the data sent by the client.
                 stream.Read(bytes, 0, bytes.Length);
                 listObject.Add(bytes);
@@ -85,27 +84,63 @@ namespace ClientQuestions
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
-
-            Console.WriteLine("\n Press Enter to continue...");
-            Console.Read();
+            
 
         }
+
         public void GetNextQuestion()
         {
             
-
-            
-
-
             lblQuestionText.Text = "Getting new question...";
             tmrTimeLeft.Enabled = false;
-            string newQuestion = "How much wood could a woodchuck chuck if a woodchuck could chuck wood?|A lot.|None.|A wee bit.|None of the above.|1";
-
-            //get the next question here
 
 
+            try //to get a new question
+            {
+                Int32 port = Convert.ToInt32(portStr);
+                client = new TcpClient(server, port);
 
-            currentQA = new QACombo(newQuestion);
+                Byte[] data = ObjectToByteArray(new QACombo());
+
+                stream = client.GetStream();
+
+                stream.Write(data, 0, data.Length);
+
+
+                List<byte[]> listObject = new List<byte[]>();
+                byte[] bytes = new byte[8192];
+                byte[] fullObjectBytes;// = new byte[8192];
+                
+                // Loop to receive all the data sent by the client.
+                stream.Read(bytes, 0, bytes.Length);
+                listObject.Add(bytes);
+
+                var bformatter = new BinaryFormatter();
+                fullObjectBytes = bytes;
+                Stream fullObjectStream = new MemoryStream(fullObjectBytes);
+                object objFromClient = bformatter.Deserialize(fullObjectStream);
+                Type objType = objFromClient.GetType();
+
+                if (objType == typeof(QACombo))
+                {
+                    currentQA.question = ((QACombo)objFromClient).question;
+                    currentQA.ans1 = ((QACombo)objFromClient).ans1;
+                    currentQA.ans2 = ((QACombo)objFromClient).ans2;
+                    currentQA.ans3 = ((QACombo)objFromClient).ans3;
+                    currentQA.ans4 = ((QACombo)objFromClient).ans4;
+                    currentQA.correctAnswer = ((QACombo)objFromClient).correctAnswer;
+                    setQAText();
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", e);
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine("SocketException: {0}", e);
+            }
+            
             lblTimeLeft.Text = "20";
             tmrTimeLeft.Enabled = true;
         }
@@ -157,7 +192,6 @@ namespace ClientQuestions
 
             lblTimeLeft.Text = Convert.ToString(timeLeft);
             GetNextQuestion();
-            setQAText();
 
             //send back to service here
 
@@ -190,7 +224,6 @@ namespace ClientQuestions
                 //get next question
                 lblTimeLeft.Text = Convert.ToString(timeLeft);
                 GetNextQuestion();
-                setQAText();
             }
             
         }
@@ -204,7 +237,7 @@ namespace ClientQuestions
                 name = txtUsername.Text;
                 pStartScreen.Visible = false;
                 connectToServer();
-                //GetNextQuestion();
+                GetNextQuestion();
             }
         }
         public static byte[] ObjectToByteArray(Object obj)
