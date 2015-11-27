@@ -276,7 +276,7 @@ namespace AdminQuestions
 
         private void btnStatus_Click(object sender, EventArgs e)
         {
-
+            pStatus.Visible = true;
         }
 
         private void btnExcelExport_Click(object sender, EventArgs e)
@@ -300,10 +300,10 @@ namespace AdminQuestions
                 //List<ExcelData> excelList = (List<ExcelData>)formatter.Deserialize(stream1);
                 List<ExcelData> excelList = new List<ExcelData>();
                 excelList.Add(new ExcelData(1, "How does this look?", 13.2, 70.3));
-                excelList.Add(new ExcelData(2, "Q2?", 13.2, 70.3));
-                excelList.Add(new ExcelData(3, "q3?", 13.2, 70.3));
+                excelList.Add(new ExcelData(2, "Q2?", 2.2, 70.3));
+                excelList.Add(new ExcelData(3, "q3?", 3.2, 70.3));
                 excelList.Add(new ExcelData(4, "q44?", 13.2, 70.3));
-                excelList.Add(new ExcelData(5, "q5!?", 13.2, 70.3));
+                excelList.Add(new ExcelData(5, "q5!?", 19.3, 70.3));
 
                 // Create an instance of Microsoft Excel and make it invisible. 
                 oXL = new Excel.Application();
@@ -318,6 +318,7 @@ namespace AdminQuestions
                 oSheet.Name = "Question Report";
 
                 // Set the column headers
+                oSheet.Cells.EntireColumn.ColumnWidth = 30;
                 oCells = oSheet.Cells;
                 oCells[1, 1] = "Question Number";
                 oCells[1, 2] = "Question";
@@ -334,17 +335,19 @@ namespace AdminQuestions
                     oCells[count, 3] = ed.avgTime;
                     oCells[count, 4] = ed.percentCorrect;
                 }
-                /*
-                Excel.Range chartRange;
+                
 
-                Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
-                Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(10, 80, 300, 250);
+                Excel.Range chartRange;
+                Excel.ChartObjects xlCharts = (Excel.ChartObjects)oSheet.ChartObjects(Type.Missing);
+                Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(700, 10, 300, 250);
                 Excel.Chart chartPage = myChart.Chart;
 
-                chartRange = oSheet.get_Range("A1", "d5");
-                chartPage.SetSourceData(chartRange, misValue);
+                chartRange = oSheet.get_Range("A1", ("C"+Convert.ToString(count-1)));
+               
+                chartPage.SetSourceData(chartRange, Excel.XlRowCol.xlColumns);
+                
                 chartPage.ChartType = Excel.XlChartType.xlColumnClustered;
-                */
+                chartPage.HasLegend = false;
 
                 // Save the workbook as a xlsx file and close it. 
 
@@ -410,6 +413,11 @@ namespace AdminQuestions
                 }
             }
 
+        }
+
+        private void btnStatusBack_Click(object sender, EventArgs e)
+        {
+            pStatus.Visible = false;
         }
     }
 }

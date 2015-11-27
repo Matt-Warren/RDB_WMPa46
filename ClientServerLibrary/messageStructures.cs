@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClientServerLibrary
 {
+<<<<<<< HEAD
     public struct Answer
     {
         public int question;
@@ -26,5 +27,24 @@ namespace ClientServerLibrary
     public class messageStructures
     {
         
+=======
+    public class messageStructures
+    {
+        public struct Answer
+        {
+            public int question;
+            public int answer;
+        }
+        public struct CurrentStatus
+        {
+            public string name;
+            public int score;
+        }
+        public struct Leaderboard
+        {
+            public string name;
+            public int score;
+        }
+>>>>>>> 1f8670714014fc953e94f43913e8f7d941785364
     }
 }
