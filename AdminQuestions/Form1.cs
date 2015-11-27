@@ -14,15 +14,19 @@ using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Net.Sockets;
 
 namespace AdminQuestions
 {
     public partial class mainForm : Form
     {
-        
-        public Stream stream;
 
-        
+        public string name;
+        public string serverIP;
+        public string portStr;
+        NetworkStream stream;
+        TcpClient server;
+
         // The current question and answer combo
         public QACombo currentQA = new QACombo();
 
@@ -46,6 +50,85 @@ namespace AdminQuestions
             InitializeComponent();
         }
 
+        private void connectToServer()
+        {
+            try
+            {
+                Int32 port = Convert.ToInt32(portStr);
+                server = new TcpClient(serverIP, port);
+
+                Byte[] data = ObjectToByteArray(name);
+
+                stream = server.GetStream();
+
+                stream.Write(data, 0, data.Length);
+
+
+                List<byte[]> listObject = new List<byte[]>();
+                byte[] bytes = new byte[8192];
+                byte[] fullObjectBytes;
+
+                // Loop to receive all the data sent by the client.
+                stream.Read(bytes, 0, bytes.Length);
+                listObject.Add(bytes);
+
+                var bformatter = new BinaryFormatter();
+                fullObjectBytes = bytes;
+                Stream fullObjectStream = new MemoryStream(fullObjectBytes);
+                object objFromServer = bformatter.Deserialize(fullObjectStream);
+                Type objType = objFromServer.GetType();
+
+                if (objType == typeof(string))
+                {
+                    MessageBox.Show((string)objFromServer);
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", e);
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine("SocketException: {0}", e);
+            }
+        }
+
+        /// <summary>
+        /// Gets the lowest question number.
+        /// </summary>
+        /// <returns></returns>
+        public int GetLowestQNumber()
+        {
+            int lowQNumber = 0;
+            int index = 0;
+            int numberOfQuestions = questionsList.Count;
+            int[] usedNumbers = new int[numberOfQuestions];
+            bool valid = false;
+            foreach(QACombo qac in questionsList)
+            {
+                usedNumbers[index] = qac.questionNum;
+                index++;
+            }
+
+            for(int x = 0; x<numberOfQuestions; x++)
+            {
+                for(int y = 0; y<numberOfQuestions; y++)
+                {
+                    if(x == usedNumbers[y])
+                    {
+                        valid = false;
+                        break;
+                    }
+                    
+                }
+                if (valid)
+                {
+                    lowQNumber = x;
+                }
+            }
+            return lowQNumber;
+        }
+
         /// <summary>
         /// Handles the Click event of the btnEditQA control.
         /// </summary>
@@ -57,17 +140,47 @@ namespace AdminQuestions
             ///////////////////////////////////////////////////////////get the list of questions from the db here
             /////////////////////////stream isn't set yet, use that
 
-            BinaryFormatter formatter = new BinaryFormatter();
             try
             {
-                stream.Seek(0, SeekOrigin.Begin);
-                questionsList = (List<QACombo>)formatter.Deserialize(stream);
+                Int32 port = Convert.ToInt32(portStr);
+                server = new TcpClient(serverIP, port);
+
+                Byte[] data = ObjectToByteArray(new List<QACombo>());
+
+                stream = server.GetStream();
+
+                stream.Write(data, 0, data.Length);
+
+
+                List<byte[]> listObject = new List<byte[]>();
+                byte[] bytes = new byte[8192];
+                byte[] fullObjectBytes;
+
+                // Loop to receive all the data sent by the client.
+                stream.Read(bytes, 0, bytes.Length);
+                listObject.Add(bytes);
+
+                var bformatter = new BinaryFormatter();
+                fullObjectBytes = bytes;
+
+                Stream fullObjectStream = new MemoryStream(fullObjectBytes);
+                object objFromServer = bformatter.Deserialize(fullObjectStream);
+                Type objType = objFromServer.GetType();
+
+                if (objType == typeof(List<QACombo>))
+                {
+                    questionsList = (List<QACombo>)objFromServer;
+                }
             }
-            catch (SerializationException se)
+            catch (ArgumentNullException e)
             {
-                MessageBox.Show(("Failed to deserialize. Reason: " + se.Message));
+                Console.WriteLine("ArgumentNullException: {0}", e);
             }
-            
+            catch (SocketException e)
+            {
+                Console.WriteLine("SocketException: {0}", e);
+            }
+
             lbQuestions.Items.Clear(); //remove all items each time
             lbQuestions.Items.Add("Add a new question..."); //set the first thing in the listbox to this to allow the user to reset fields
 
@@ -85,18 +198,25 @@ namespace AdminQuestions
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnQABack_Click(object sender, EventArgs e)
         {
-            //save stuff to database
-            BinaryFormatter formatter = new BinaryFormatter();
-            //using (MemoryStream stream = new MemoryStream())
+            try //to send the QACombo list back to the server
+            { 
+                Int32 port = Convert.ToInt32(portStr);
+                server = new TcpClient(serverIP, port);
+
+                Byte[] data = ObjectToByteArray(questionsList);
+
+                stream = server.GetStream();
+
+                stream.Write(data, 0, data.Length);
+
+            }
+            catch (ArgumentNullException e)
             {
-                try
-                {
-                    formatter.Serialize(stream, questionsList);
-                }
-                catch (SerializationException se)
-                {
-                    MessageBox.Show(("Failed to serialize. Reason: " + se.Message));
-                }
+                Console.WriteLine("ArgumentNullException: {0}", e);
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine("SocketException: {0}", e);
             }
 
             pEditQA.Visible = false;
@@ -203,7 +323,7 @@ namespace AdminQuestions
 
                     if (qid == 0)
                     { //make a new question
-                        currentQA = new QACombo(txtQuestion.Text + "|" + txtAns1.Text + "|" + txtAns2.Text + "|" + txtAns3.Text + "|" + txtAns4.Text + "|" + (cbAns_1.Checked == true ? 1 : cbAns_2.Checked == true ? 2 : cbAns_3.Checked == true ? 3 : 4));
+                        currentQA = new QACombo(Convert.ToString(GetLowestQNumber()), + "|" + txtQuestion.Text + "|" + txtAns1.Text + "|" + txtAns2.Text + "|" + txtAns3.Text + "|" + txtAns4.Text + "|" + (cbAns_1.Checked == true ? 1 : cbAns_2.Checked == true ? 2 : cbAns_3.Checked == true ? 3 : 4));
                         questionsList.Add(currentQA);
                         lbQuestions.Items.Add(currentQA.question);
 
@@ -289,10 +409,47 @@ namespace AdminQuestions
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnLeaderboard_Click(object sender, EventArgs e)
         {
-            
-            /////////////////////////////////////////get the current status from the server here
-            /////////////////////////////////////////can use stream again
-            List<Leaderboard> currStatList = new List<Leaderboard>(); //put leaderboard in here
+            List<Leaderboard> currStatList = new List<Leaderboard>();
+            try
+            {
+                Int32 port = Convert.ToInt32(portStr);
+                server = new TcpClient(serverIP, port);
+
+                Byte[] data = ObjectToByteArray(new Leaderboard());
+
+                stream = server.GetStream();
+
+                stream.Write(data, 0, data.Length);
+
+                List<byte[]> listObject = new List<byte[]>();
+                byte[] bytes = new byte[8192];
+                byte[] fullObjectBytes;
+
+                // Loop to receive all the data sent by the client.
+                stream.Read(bytes, 0, bytes.Length);
+                listObject.Add(bytes);
+
+                var bformatter = new BinaryFormatter();
+                fullObjectBytes = bytes;
+                Stream fullObjectStream = new MemoryStream(fullObjectBytes);
+                object objFromServer = bformatter.Deserialize(fullObjectStream);
+                Type objType = objFromServer.GetType();
+
+                if (objType == typeof(List<Leaderboard>))
+                {
+                    currStatList = (List<Leaderboard>)objFromServer;
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", e);
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine("SocketException: {0}", e);
+            }
+
+            //put leaderboard in here
             dgStatus.SelectAll();
             dgStatus.ClearSelection();
             foreach (Leaderboard current in currStatList)
@@ -486,6 +643,28 @@ namespace AdminQuestions
         private void btnStatusBack_Click(object sender, EventArgs e)
         {
             pStatus.Visible = false;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            if (txtPort.Text != "" && txtServer.Text != "")
+            {
+                portStr = txtPort.Text;
+                serverIP = txtServer.Text;
+                name = "admin";
+                pStartScreen.Visible = false;
+                connectToServer();
+            }
+        }
+
+        public static byte[] ObjectToByteArray(Object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
         }
     }
 }
