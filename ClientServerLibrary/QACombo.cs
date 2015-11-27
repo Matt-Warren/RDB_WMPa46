@@ -9,7 +9,7 @@ namespace ClientServerLibrary
     [Serializable]
     public class QACombo
     {
-
+        public int questionNum { get; set; }
         public string question { get; set; }
         public string ans1 { get; set; }
         public string ans2 { get; set; }
@@ -26,24 +26,26 @@ namespace ClientServerLibrary
         public QACombo(string qaString)
         {
             string[] temp = qaString.Split('|');
-            this.question = temp[0];
-            this.ans1 = temp[1];
-            this.ans2 = temp[2];
-            this.ans3 = temp[3];
-            this.ans4 = temp[4];
-            this.correctAnswer = Convert.ToInt32(temp[5]);
+            questionNum = Convert.ToInt16(temp[0]);
+            this.question = temp[1];
+            this.ans1 = temp[2];
+            this.ans2 = temp[3];
+            this.ans3 = temp[4];
+            this.ans4 = temp[5];
+            this.correctAnswer = Convert.ToInt32(temp[6]);
             isSet = true;
         }
 
         public void SetQACombo(string qaString)
         {
             string[] temp = qaString.Split('|');
-            this.question = temp[0];
-            this.ans1 = temp[1];
-            this.ans2 = temp[2];
-            this.ans3 = temp[3];
-            this.ans4 = temp[4];
-            this.correctAnswer = Convert.ToInt32(temp[5]);
+            questionNum = Convert.ToInt16(temp[0]);
+            this.question = temp[1];
+            this.ans1 = temp[2];
+            this.ans2 = temp[3];
+            this.ans3 = temp[4];
+            this.ans4 = temp[5];
+            this.correctAnswer = Convert.ToInt32(temp[6]);
             isSet = true;
         }
 
