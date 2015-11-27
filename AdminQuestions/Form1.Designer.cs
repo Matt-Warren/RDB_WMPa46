@@ -57,9 +57,18 @@
             this.btnLeaderboardBack = new System.Windows.Forms.Button();
             this.pStatus = new System.Windows.Forms.Panel();
             this.btnStatusBack = new System.Windows.Forms.Button();
+            this.dgStatus = new System.Windows.Forms.DataGridView();
+            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuestionNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgLeader = new System.Windows.Forms.DataGridView();
+            this.leaderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.leaderScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pEditQA.SuspendLayout();
             this.pLeaderboard.SuspendLayout();
             this.pStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLeader)).BeginInit();
             this.SuspendLayout();
             // 
             // btnEditQA
@@ -316,6 +325,7 @@
             // 
             // pLeaderboard
             // 
+            this.pLeaderboard.Controls.Add(this.dgLeader);
             this.pLeaderboard.Controls.Add(this.btnLeaderboardBack);
             this.pLeaderboard.Location = new System.Drawing.Point(12, 3);
             this.pLeaderboard.Name = "pLeaderboard";
@@ -335,6 +345,7 @@
             // 
             // pStatus
             // 
+            this.pStatus.Controls.Add(this.dgStatus);
             this.pStatus.Controls.Add(this.btnStatusBack);
             this.pStatus.Location = new System.Drawing.Point(12, 7);
             this.pStatus.Name = "pStatus";
@@ -352,24 +363,85 @@
             this.btnStatusBack.UseVisualStyleBackColor = true;
             this.btnStatusBack.Click += new System.EventHandler(this.btnStatusBack_Click);
             // 
+            // dgStatus
+            // 
+            this.dgStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Name,
+            this.QuestionNumber,
+            this.Score});
+            this.dgStatus.Location = new System.Drawing.Point(20, 35);
+            this.dgStatus.Name = "dgStatus";
+            this.dgStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgStatus.Size = new System.Drawing.Size(543, 367);
+            this.dgStatus.TabIndex = 1;
+            // 
+            // Name
+            // 
+            this.Name.HeaderText = "Name";
+            this.Name.Name = "Name";
+            this.Name.ReadOnly = true;
+            this.Name.Width = 200;
+            // 
+            // QuestionNumber
+            // 
+            this.QuestionNumber.HeaderText = "QuestionNumber";
+            this.QuestionNumber.Name = "QuestionNumber";
+            this.QuestionNumber.ReadOnly = true;
+            // 
+            // Score
+            // 
+            this.Score.HeaderText = "Score";
+            this.Score.Name = "Score";
+            this.Score.ReadOnly = true;
+            this.Score.Width = 200;
+            // 
+            // dgLeader
+            // 
+            this.dgLeader.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLeader.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.leaderName,
+            this.leaderScore});
+            this.dgLeader.Location = new System.Drawing.Point(18, 42);
+            this.dgLeader.Name = "dgLeader";
+            this.dgLeader.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgLeader.Size = new System.Drawing.Size(545, 352);
+            this.dgLeader.TabIndex = 1;
+            // 
+            // leaderName
+            // 
+            this.leaderName.HeaderText = "Name";
+            this.leaderName.Name = "leaderName";
+            this.leaderName.ReadOnly = true;
+            this.leaderName.Width = 250;
+            // 
+            // leaderScore
+            // 
+            this.leaderScore.HeaderText = "Score";
+            this.leaderScore.Name = "leaderScore";
+            this.leaderScore.ReadOnly = true;
+            this.leaderScore.Width = 250;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 421);
-            this.Controls.Add(this.pStatus);
-            this.Controls.Add(this.pEditQA);
             this.Controls.Add(this.pLeaderboard);
             this.Controls.Add(this.btnExcelExport);
             this.Controls.Add(this.btnLeaderboard);
             this.Controls.Add(this.btnStatus);
             this.Controls.Add(this.btnEditQA);
+            this.Controls.Add(this.pStatus);
+            this.Controls.Add(this.pEditQA);
             this.Name = "mainForm";
             this.Text = "Admin";
             this.pEditQA.ResumeLayout(false);
             this.pEditQA.PerformLayout();
             this.pLeaderboard.ResumeLayout(false);
             this.pStatus.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLeader)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -405,6 +477,13 @@
         private System.Windows.Forms.Button btnLeaderboardBack;
         private System.Windows.Forms.Panel pStatus;
         private System.Windows.Forms.Button btnStatusBack;
+        private System.Windows.Forms.DataGridView dgStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuestionNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Score;
+        private System.Windows.Forms.DataGridView dgLeader;
+        private System.Windows.Forms.DataGridViewTextBoxColumn leaderName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn leaderScore;
     }
 }
 
