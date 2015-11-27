@@ -54,21 +54,28 @@
             this.txtQuestion = new System.Windows.Forms.TextBox();
             this.lbQuestions = new System.Windows.Forms.ListBox();
             this.pLeaderboard = new System.Windows.Forms.Panel();
+            this.dgLeader = new System.Windows.Forms.DataGridView();
+            this.leaderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.leaderScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnLeaderboardBack = new System.Windows.Forms.Button();
             this.pStatus = new System.Windows.Forms.Panel();
-            this.btnStatusBack = new System.Windows.Forms.Button();
             this.dgStatus = new System.Windows.Forms.DataGridView();
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuestionNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgLeader = new System.Windows.Forms.DataGridView();
-            this.leaderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.leaderScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnStatusBack = new System.Windows.Forms.Button();
+            this.pStartScreen = new System.Windows.Forms.Panel();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.lblPort = new System.Windows.Forms.Label();
+            this.lblServer = new System.Windows.Forms.Label();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.txtServer = new System.Windows.Forms.TextBox();
             this.pEditQA.SuspendLayout();
             this.pLeaderboard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLeader)).BeginInit();
             this.pStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLeader)).BeginInit();
+            this.pStartScreen.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnEditQA
@@ -333,6 +340,32 @@
             this.pLeaderboard.TabIndex = 20;
             this.pLeaderboard.Visible = false;
             // 
+            // dgLeader
+            // 
+            this.dgLeader.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLeader.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.leaderName,
+            this.leaderScore});
+            this.dgLeader.Location = new System.Drawing.Point(18, 42);
+            this.dgLeader.Name = "dgLeader";
+            this.dgLeader.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgLeader.Size = new System.Drawing.Size(545, 352);
+            this.dgLeader.TabIndex = 1;
+            // 
+            // leaderName
+            // 
+            this.leaderName.HeaderText = "Name";
+            this.leaderName.Name = "leaderName";
+            this.leaderName.ReadOnly = true;
+            this.leaderName.Width = 250;
+            // 
+            // leaderScore
+            // 
+            this.leaderScore.HeaderText = "Score";
+            this.leaderScore.Name = "leaderScore";
+            this.leaderScore.ReadOnly = true;
+            this.leaderScore.Width = 250;
+            // 
             // btnLeaderboardBack
             // 
             this.btnLeaderboardBack.Location = new System.Drawing.Point(488, 10);
@@ -352,16 +385,6 @@
             this.pStatus.Size = new System.Drawing.Size(568, 406);
             this.pStatus.TabIndex = 21;
             this.pStatus.Visible = false;
-            // 
-            // btnStatusBack
-            // 
-            this.btnStatusBack.Location = new System.Drawing.Point(488, 10);
-            this.btnStatusBack.Name = "btnStatusBack";
-            this.btnStatusBack.Size = new System.Drawing.Size(75, 23);
-            this.btnStatusBack.TabIndex = 0;
-            this.btnStatusBack.Text = "Back";
-            this.btnStatusBack.UseVisualStyleBackColor = true;
-            this.btnStatusBack.Click += new System.EventHandler(this.btnStatusBack_Click);
             // 
             // dgStatus
             // 
@@ -396,37 +419,78 @@
             this.Score.ReadOnly = true;
             this.Score.Width = 200;
             // 
-            // dgLeader
+            // btnStatusBack
             // 
-            this.dgLeader.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLeader.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.leaderName,
-            this.leaderScore});
-            this.dgLeader.Location = new System.Drawing.Point(18, 42);
-            this.dgLeader.Name = "dgLeader";
-            this.dgLeader.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgLeader.Size = new System.Drawing.Size(545, 352);
-            this.dgLeader.TabIndex = 1;
+            this.btnStatusBack.Location = new System.Drawing.Point(488, 10);
+            this.btnStatusBack.Name = "btnStatusBack";
+            this.btnStatusBack.Size = new System.Drawing.Size(75, 23);
+            this.btnStatusBack.TabIndex = 0;
+            this.btnStatusBack.Text = "Back";
+            this.btnStatusBack.UseVisualStyleBackColor = true;
+            this.btnStatusBack.Click += new System.EventHandler(this.btnStatusBack_Click);
             // 
-            // leaderName
+            // pStartScreen
             // 
-            this.leaderName.HeaderText = "Name";
-            this.leaderName.Name = "leaderName";
-            this.leaderName.ReadOnly = true;
-            this.leaderName.Width = 250;
+            this.pStartScreen.Controls.Add(this.btnStart);
+            this.pStartScreen.Controls.Add(this.lblPort);
+            this.pStartScreen.Controls.Add(this.lblServer);
+            this.pStartScreen.Controls.Add(this.txtPort);
+            this.pStartScreen.Controls.Add(this.txtServer);
+            this.pStartScreen.Location = new System.Drawing.Point(2, 3);
+            this.pStartScreen.Name = "pStartScreen";
+            this.pStartScreen.Size = new System.Drawing.Size(587, 421);
+            this.pStartScreen.TabIndex = 22;
             // 
-            // leaderScore
+            // btnStart
             // 
-            this.leaderScore.HeaderText = "Score";
-            this.leaderScore.Name = "leaderScore";
-            this.leaderScore.ReadOnly = true;
-            this.leaderScore.Width = 250;
+            this.btnStart.Location = new System.Drawing.Point(158, 112);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(218, 41);
+            this.btnStart.TabIndex = 6;
+            this.btnStart.Text = "START!";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // lblPort
+            // 
+            this.lblPort.AutoSize = true;
+            this.lblPort.Location = new System.Drawing.Point(155, 89);
+            this.lblPort.Name = "lblPort";
+            this.lblPort.Size = new System.Drawing.Size(29, 13);
+            this.lblPort.TabIndex = 5;
+            this.lblPort.Text = "Port:";
+            // 
+            // lblServer
+            // 
+            this.lblServer.AutoSize = true;
+            this.lblServer.Location = new System.Drawing.Point(155, 63);
+            this.lblServer.Name = "lblServer";
+            this.lblServer.Size = new System.Drawing.Size(41, 13);
+            this.lblServer.TabIndex = 4;
+            this.lblServer.Text = "Server:";
+            // 
+            // txtPort
+            // 
+            this.txtPort.Location = new System.Drawing.Point(246, 86);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(130, 20);
+            this.txtPort.TabIndex = 2;
+            this.txtPort.Text = "53512";
+            // 
+            // txtServer
+            // 
+            this.txtServer.Location = new System.Drawing.Point(246, 60);
+            this.txtServer.Name = "txtServer";
+            this.txtServer.Size = new System.Drawing.Size(130, 20);
+            this.txtServer.TabIndex = 1;
+            this.txtServer.Text = "192.168.0.10";
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 421);
+            this.Controls.Add(this.pStartScreen);
             this.Controls.Add(this.pLeaderboard);
             this.Controls.Add(this.btnExcelExport);
             this.Controls.Add(this.btnLeaderboard);
@@ -439,9 +503,11 @@
             this.pEditQA.ResumeLayout(false);
             this.pEditQA.PerformLayout();
             this.pLeaderboard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgLeader)).EndInit();
             this.pStatus.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLeader)).EndInit();
+            this.pStartScreen.ResumeLayout(false);
+            this.pStartScreen.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -484,6 +550,12 @@
         private System.Windows.Forms.DataGridView dgLeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn leaderName;
         private System.Windows.Forms.DataGridViewTextBoxColumn leaderScore;
+        private System.Windows.Forms.Panel pStartScreen;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Label lblPort;
+        private System.Windows.Forms.Label lblServer;
+        private System.Windows.Forms.TextBox txtPort;
+        private System.Windows.Forms.TextBox txtServer;
     }
 }
 
