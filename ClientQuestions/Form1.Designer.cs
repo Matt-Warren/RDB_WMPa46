@@ -40,9 +40,18 @@
             this.pTimeLeft = new System.Windows.Forms.Panel();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.tmrTimeLeft = new System.Windows.Forms.Timer(this.components);
+            this.pStartScreen = new System.Windows.Forms.Panel();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.txtServer = new System.Windows.Forms.TextBox();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.lblServer = new System.Windows.Forms.Label();
+            this.lblPort = new System.Windows.Forms.Label();
+            this.btnStart = new System.Windows.Forms.Button();
             this.pQuestions.SuspendLayout();
             this.pAnswers.SuspendLayout();
             this.pTimeLeft.SuspendLayout();
+            this.pStartScreen.SuspendLayout();
             this.SuspendLayout();
             // 
             // pQuestions
@@ -149,11 +158,85 @@
             this.tmrTimeLeft.Interval = 1000;
             this.tmrTimeLeft.Tick += new System.EventHandler(this.tmrTimeLeft_Tick);
             // 
+            // pStartScreen
+            // 
+            this.pStartScreen.Controls.Add(this.btnStart);
+            this.pStartScreen.Controls.Add(this.lblPort);
+            this.pStartScreen.Controls.Add(this.lblServer);
+            this.pStartScreen.Controls.Add(this.lblUsername);
+            this.pStartScreen.Controls.Add(this.txtPort);
+            this.pStartScreen.Controls.Add(this.txtServer);
+            this.pStartScreen.Controls.Add(this.txtUsername);
+            this.pStartScreen.Location = new System.Drawing.Point(3, 3);
+            this.pStartScreen.Name = "pStartScreen";
+            this.pStartScreen.Size = new System.Drawing.Size(511, 353);
+            this.pStartScreen.TabIndex = 5;
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(246, 34);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(130, 20);
+            this.txtUsername.TabIndex = 0;
+            // 
+            // txtServer
+            // 
+            this.txtServer.Location = new System.Drawing.Point(246, 60);
+            this.txtServer.Name = "txtServer";
+            this.txtServer.Size = new System.Drawing.Size(130, 20);
+            this.txtServer.TabIndex = 1;
+            // 
+            // txtPort
+            // 
+            this.txtPort.Location = new System.Drawing.Point(246, 86);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(130, 20);
+            this.txtPort.TabIndex = 2;
+            this.txtPort.Text = "53512";
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Location = new System.Drawing.Point(155, 37);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(38, 13);
+            this.lblUsername.TabIndex = 3;
+            this.lblUsername.Text = "Name:";
+            // 
+            // lblServer
+            // 
+            this.lblServer.AutoSize = true;
+            this.lblServer.Location = new System.Drawing.Point(155, 63);
+            this.lblServer.Name = "lblServer";
+            this.lblServer.Size = new System.Drawing.Size(41, 13);
+            this.lblServer.TabIndex = 4;
+            this.lblServer.Text = "Server:";
+            // 
+            // lblPort
+            // 
+            this.lblPort.AutoSize = true;
+            this.lblPort.Location = new System.Drawing.Point(155, 89);
+            this.lblPort.Name = "lblPort";
+            this.lblPort.Size = new System.Drawing.Size(29, 13);
+            this.lblPort.TabIndex = 5;
+            this.lblPort.Text = "Port:";
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(158, 112);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(218, 41);
+            this.btnStart.TabIndex = 6;
+            this.btnStart.Text = "START!";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 360);
+            this.Controls.Add(this.pStartScreen);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.pTimeLeft);
             this.Controls.Add(this.pAnswers);
@@ -167,6 +250,8 @@
             this.pAnswers.PerformLayout();
             this.pTimeLeft.ResumeLayout(false);
             this.pTimeLeft.PerformLayout();
+            this.pStartScreen.ResumeLayout(false);
+            this.pStartScreen.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -184,6 +269,14 @@
         private System.Windows.Forms.Panel pTimeLeft;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Timer tmrTimeLeft;
+        private System.Windows.Forms.Panel pStartScreen;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Label lblPort;
+        private System.Windows.Forms.Label lblServer;
+        private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.TextBox txtPort;
+        private System.Windows.Forms.TextBox txtServer;
+        private System.Windows.Forms.TextBox txtUsername;
     }
 }
 

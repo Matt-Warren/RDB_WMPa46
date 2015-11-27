@@ -65,7 +65,6 @@ namespace QuizService
             List<byte[]> listObject = new List<byte[]>();
             byte[] bytes = new byte[8192];
             byte[] fullObjectBytes;// = new byte[8192];
-            string data = null;
             ClientConnections connection = (ClientConnections)obj;
             // Get a stream object for reading and writing
             NetworkStream stream = connection.cSocket.GetStream();
@@ -167,7 +166,7 @@ namespace QuizService
             {
                 eventLogger.WriteEntry("Starting service");
                 // Set the TcpListener on port 13000.
-                Int32 port = 13000;
+                Int32 port = 53512;
                 IPAddress localAddr = IPAddress.Parse("127.0.0.1");
 
                 // TcpListener server = new TcpListener(port);
