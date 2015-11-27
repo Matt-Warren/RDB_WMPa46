@@ -12,6 +12,7 @@ using ClientServerLibrary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
+using MySql.Data.MySqlClient;
 
 namespace QuizService
 {
@@ -140,6 +141,7 @@ namespace QuizService
             else if(objType == typeof(QACombo))
             {
                 QACombo sendCombo = new QACombo();
+                connection.question++;
                 ////////////////////////////////////////////////////////////
             }
             else if(objType == typeof(List<QACombo>))
@@ -172,7 +174,7 @@ namespace QuizService
                 eventLogger.WriteEntry("Starting service");
                 // Set the TcpListener on port 13000.
                 Int32 port = 53512;
-                IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+                IPAddress localAddr = IPAddress.Parse(GetLocalIPAddress());
 
                 // TcpListener server = new TcpListener(port);
                 server = new TcpListener(localAddr, port);
@@ -190,6 +192,7 @@ namespace QuizService
 
                     eventLogger.WriteEntry("Waiting for connection");
                     Console.Write("Waiting for a connection... ");
+                    Console.Write(GetLocalIPAddress());
 
                     // Perform a blocking call to accept requests.
                     // You could also user server.AcceptSocket() here.
@@ -250,6 +253,18 @@ namespace QuizService
                 bf.Serialize(ms, obj);
                 return ms.ToArray();
             }
+        }
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("Local IP Address Not Found!");
         }
     }
 }
