@@ -48,6 +48,7 @@
             this.txtPort = new System.Windows.Forms.TextBox();
             this.txtServer = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
+            this.pEndQuestions = new System.Windows.Forms.Panel();
             this.pQuestions.SuspendLayout();
             this.pAnswers.SuspendLayout();
             this.pTimeLeft.SuspendLayout();
@@ -233,11 +234,20 @@
             this.txtUsername.TabIndex = 0;
             this.txtUsername.Text = "ddd";
             // 
+            // pEndQuestions
+            // 
+            this.pEndQuestions.Location = new System.Drawing.Point(4, 4);
+            this.pEndQuestions.Name = "pEndQuestions";
+            this.pEndQuestions.Size = new System.Drawing.Size(511, 353);
+            this.pEndQuestions.TabIndex = 6;
+            this.pEndQuestions.Visible = false;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 360);
+            this.Controls.Add(this.pEndQuestions);
             this.Controls.Add(this.pStartScreen);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.pTimeLeft);
@@ -279,6 +289,7 @@
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.TextBox txtServer;
         private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Panel pEndQuestions;
     }
 }
 

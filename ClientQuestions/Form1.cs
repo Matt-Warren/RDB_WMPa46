@@ -133,6 +133,10 @@ namespace ClientQuestions
                     currentQA.correctAnswer = ((QACombo)objFromClient).correctAnswer;
                     setQAText();
                 }
+                else if(objType == typeof(List<Result>))
+                {
+                    pEndQuestions.Visible = true;
+                }
             }
             catch (ArgumentNullException e)
             {
