@@ -46,3 +46,7 @@ C:\Users\wheat\Documents\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.exe.
 C:\Users\wheat\Documents\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.csproj.ResolveComReference.cache
 C:\Users\wheat\Documents\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.exe
 C:\Users\wheat\Documents\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.pdb
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.exe.config
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.csproj.ResolveComReference.cache
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.exe
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.pdb
