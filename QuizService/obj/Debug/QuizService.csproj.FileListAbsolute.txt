@@ -20,3 +20,4 @@ C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\bin\Debug\ClientSer
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.ProjectInstaller.resources
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.exe
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.pdb
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\bin\Debug\MySql.Data.dll
