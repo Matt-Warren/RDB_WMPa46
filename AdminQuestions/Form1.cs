@@ -83,13 +83,13 @@ namespace AdminQuestions
                     MessageBox.Show((string)objFromServer);
                 }
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException ae)
             {
-                Console.WriteLine("ArgumentNullException: {0}", e);
+                MessageBox.Show("ArgumentNullException: " + ae.Message);
             }
-            catch (SocketException e)
+            catch (SocketException se)
             {
-                Console.WriteLine("SocketException: {0}", e);
+                MessageBox.Show("SocketException:" + se.Message);
             }
         }
 
@@ -142,8 +142,6 @@ namespace AdminQuestions
 
             try
             {
-                Int32 port = Convert.ToInt32(portStr);
-                server = new TcpClient(serverIP, port);
 
                 Byte[] data = ObjectToByteArray(new List<QACombo>());
 
@@ -172,13 +170,13 @@ namespace AdminQuestions
                     questionsList = (List<QACombo>)objFromServer;
                 }
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException ae)
             {
-                Console.WriteLine("ArgumentNullException: {0}", e);
+                MessageBox.Show("ArgumentNullException: " + ae.Message);
             }
-            catch (SocketException e)
+            catch (SocketException se)
             {
-                Console.WriteLine("SocketException: {0}", e);
+                MessageBox.Show("SocketException: " +  se.Message);
             }
 
             lbQuestions.Items.Clear(); //remove all items each time
@@ -200,8 +198,6 @@ namespace AdminQuestions
         {
             try //to send the QACombo list back to the server
             { 
-                Int32 port = Convert.ToInt32(portStr);
-                server = new TcpClient(serverIP, port);
 
                 Byte[] data = ObjectToByteArray(questionsList);
 
@@ -210,13 +206,13 @@ namespace AdminQuestions
                 stream.Write(data, 0, data.Length);
 
             }
-            catch (ArgumentNullException e)
+            catch(ArgumentNullException ae)
             {
-                Console.WriteLine("ArgumentNullException: {0}", e);
+                MessageBox.Show("ArgumentNullException: " + ae.Message);
             }
-            catch (SocketException e)
+            catch(SocketException se)
             {
-                Console.WriteLine("SocketException: {0}", e);
+                MessageBox.Show("SocketException: " + se.Message);
             }
 
             pEditQA.Visible = false;
@@ -323,7 +319,7 @@ namespace AdminQuestions
 
                     if (qid == 0)
                     { //make a new question
-                        currentQA = new QACombo(Convert.ToString(GetLowestQNumber()), + "|" + txtQuestion.Text + "|" + txtAns1.Text + "|" + txtAns2.Text + "|" + txtAns3.Text + "|" + txtAns4.Text + "|" + (cbAns_1.Checked == true ? 1 : cbAns_2.Checked == true ? 2 : cbAns_3.Checked == true ? 3 : 4));
+                        currentQA = new QACombo(Convert.ToString(GetLowestQNumber()) + "|" + txtQuestion.Text + "|" + txtAns1.Text + "|" + txtAns2.Text + "|" + txtAns3.Text + "|" + txtAns4.Text + "|" + (cbAns_1.Checked == true ? 1 : cbAns_2.Checked == true ? 2 : cbAns_3.Checked == true ? 3 : 4));
                         questionsList.Add(currentQA);
                         lbQuestions.Items.Add(currentQA.question);
 
@@ -409,11 +405,10 @@ namespace AdminQuestions
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnLeaderboard_Click(object sender, EventArgs e)
         {
-            List<Leaderboard> currStatList = new List<Leaderboard>();
+            List<Leaderboard> currLeaderList = new List<Leaderboard>();
             try
             {
-                Int32 port = Convert.ToInt32(portStr);
-                server = new TcpClient(serverIP, port);
+                
 
                 Byte[] data = ObjectToByteArray(new Leaderboard());
 
@@ -437,22 +432,21 @@ namespace AdminQuestions
 
                 if (objType == typeof(List<Leaderboard>))
                 {
-                    currStatList = (List<Leaderboard>)objFromServer;
+                    currLeaderList = (List<Leaderboard>)objFromServer;
                 }
             }
-            catch (ArgumentNullException e)
+            catch(ArgumentNullException ae)
             {
-                Console.WriteLine("ArgumentNullException: {0}", e);
+                MessageBox.Show("ArgumentNullException: " + ae.Message);
             }
-            catch (SocketException e)
+            catch(SocketException se)
             {
-                Console.WriteLine("SocketException: {0}", e);
+                MessageBox.Show("SocketException: " + se.Message);
             }
-
-            //put leaderboard in here
-            dgStatus.SelectAll();
-            dgStatus.ClearSelection();
-            foreach (Leaderboard current in currStatList)
+            
+            dgLeader.SelectAll();
+            dgLeader.ClearSelection();
+            foreach (Leaderboard current in currLeaderList)
             {
                 dgLeader.Rows.Add(current.name, current.score); //sets up the datagrid
             }
@@ -479,10 +473,43 @@ namespace AdminQuestions
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnStatus_Click(object sender, EventArgs e)
         {
-            
-            /////////////////////////////////////////get the current status from the server here
-            /////////////////////////////////////////can use stream again
             List<CurrentStatus> currStatList = new List<CurrentStatus>(); //put statuss in here
+            try
+            {
+
+                Byte[] data = ObjectToByteArray(new CurrentStatus());
+
+                stream = server.GetStream();
+
+                stream.Write(data, 0, data.Length);
+
+                List<byte[]> listObject = new List<byte[]>();
+                byte[] bytes = new byte[8192];
+                byte[] fullObjectBytes;
+
+                // Loop to receive all the data sent by the client.
+                stream.Read(bytes, 0, bytes.Length);
+                listObject.Add(bytes);
+
+                var bformatter = new BinaryFormatter();
+                fullObjectBytes = bytes;
+                Stream fullObjectStream = new MemoryStream(fullObjectBytes);
+                object objFromServer = bformatter.Deserialize(fullObjectStream);
+                Type objType = objFromServer.GetType();
+
+                if (objType == typeof(List<CurrentStatus>))
+                {
+                    currStatList = (List<CurrentStatus>)objFromServer;
+                }
+            }
+            catch(ArgumentNullException ae)
+            {
+                MessageBox.Show("ArgumentNullException: " + ae.Message);
+            }
+            catch(SocketException se)
+            {
+                MessageBox.Show("SocketException: " + se.Message);
+            }
             dgStatus.SelectAll();
             dgStatus.ClearSelection();
             foreach(CurrentStatus current in currStatList)
@@ -500,8 +527,42 @@ namespace AdminQuestions
         private void btnExcelExport_Click(object sender, EventArgs e)
         {
             List<ExcelData> excelList = new List<ExcelData>(); //store the list of excel data in here
-            //////////////////////////////////////////////get list of questions and such from the server *******************
-            //////////////////////////////////////////////can use stream or whatever
+            try
+            {
+
+                Byte[] data = ObjectToByteArray(new ExcelData());
+
+                stream = server.GetStream();
+
+                stream.Write(data, 0, data.Length);
+
+                List<byte[]> listObject = new List<byte[]>();
+                byte[] bytes = new byte[8192];
+                byte[] fullObjectBytes;
+
+                // Loop to receive all the data sent by the client.
+                stream.Read(bytes, 0, bytes.Length);
+                listObject.Add(bytes);
+
+                var bformatter = new BinaryFormatter();
+                fullObjectBytes = bytes;
+                Stream fullObjectStream = new MemoryStream(fullObjectBytes);
+                object objFromServer = bformatter.Deserialize(fullObjectStream);
+                Type objType = objFromServer.GetType();
+
+                if (objType == typeof(List<ExcelData>))
+                {
+                    excelList = (List<ExcelData>)objFromServer;
+                }
+            }
+            catch(ArgumentNullException ae)
+            {
+                MessageBox.Show("ArgumentNullException: ", ae.Message);
+            }
+            catch(SocketException se)
+            {
+                MessageBox.Show("SocketException: ", se.Message);
+            }
             BinaryFormatter formatter = new BinaryFormatter();
 
             object missing = Type.Missing;
@@ -577,10 +638,9 @@ namespace AdminQuestions
 
                 oXL.Quit();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                Console.WriteLine("Solution1.AutomateExcel throws the error: {0}",
-                    ex.Message);
+                MessageBox.Show(ex.Message);
             }
             finally
             {
