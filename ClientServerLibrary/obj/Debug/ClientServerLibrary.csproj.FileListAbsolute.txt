@@ -3,3 +3,8 @@ C:\Users\sdjohnston\Desktop\repo\ClientServerLibrary\bin\Debug\ClientServerLibra
 C:\Users\sdjohnston\Desktop\repo\ClientServerLibrary\obj\Debug\ClientServerLibrary.csprojResolveAssemblyReference.cache
 C:\Users\sdjohnston\Desktop\repo\ClientServerLibrary\obj\Debug\ClientServerLibrary.dll
 C:\Users\sdjohnston\Desktop\repo\ClientServerLibrary\obj\Debug\ClientServerLibrary.pdb
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.dll
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.pdb
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.dll
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.pdb
