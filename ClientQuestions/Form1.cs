@@ -192,9 +192,6 @@ namespace ClientQuestions
             uncheckOthers(checkBoxes.ALL);
             tmrTimeLeft.Enabled = false;
             GetNextQuestion();
-
-            //send back to service here
-
         }
 
         private void cbClicked(object sender, EventArgs e)

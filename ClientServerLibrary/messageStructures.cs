@@ -30,6 +30,15 @@ namespace ClientServerLibrary
     [Serializable]
     public struct Result
     {
+        public Result(string str)
+        {
+            string[] info = str.Split('|');
+
+            questionNumber = Convert.ToInt16(info[0]);
+            question = info[1];
+            actualAnswer = info[2];
+            theirAnswer = info[3];
+        }
         public int questionNumber;
         public string question;
         public string actualAnswer;

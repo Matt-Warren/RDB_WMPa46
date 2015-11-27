@@ -22,12 +22,10 @@ namespace QuizService
         {
             public TcpClient cSocket;
             public MyTimer rTimer;
-            public MyTimer wTimer;
-            public string userType;
             public int question;
             public int score;
             public string name;
-            public List<string> answers;
+            public List<Result> results;
         }
         EventLog eventLogger;
         List<ClientConnections> connections = new List<ClientConnections>();
@@ -107,19 +105,42 @@ namespace QuizService
 
             if (objType == typeof(String))//client sent name
             {
-
                 connection.name = ((string)objFromClient);
                 objectOut = ObjectToByteArray("Connected");
             }
             else if (objType == typeof(Answer))//client gives you an answer (give them next question or their results)
             {
                 Answer userAnswer = (Answer)objFromClient;
-                if (userAnswer.answer == Convert.ToInt16(db.Select("Select correctAnswer from questions where ID=" + userAnswer.question).First()))
+
+                if (connection.question != -1)//first question
                 {
+                    List<string> queryRow = db.Select("Select questionNum,question,ans1,ans2,ans3,ans4,correctAnswer from questions where questionNum = " + connection.question).FirstOrDefault();
 
+                    QACombo QARow = new QACombo(String.Join("|", queryRow));
+
+                    if (userAnswer.answer == QARow.correctAnswer)
+                    {
+                        connection.score += userAnswer.timeLeft;
+                    }
+                    else
+                    {
+                        userAnswer.timeLeft = 0;
+                    }
+                    connection.results.Add(new Result(QARow.questionNum + "|" + QARow.question + "|" + queryRow[2 + QARow.correctAnswer] + "|" + queryRow[2 + userAnswer.answer]));
+                    db.Insert("INSERT INTO questionattempts (questionId,timeLeft)VALUES(" + QARow.questionNum + "," + userAnswer.timeLeft + ")");
                 }
-                connection.score += userAnswer.timeLeft;
+                List<string> nextQuestion = db.Select("Select questionNum,question,ans1,ans2,ans3,ans4,correctAnswer from questions where questionNum > " + connection.question + "Order By ID DESC").FirstOrDefault();
+                if (nextQuestion != null)
+                {
+                    QACombo nextQ = new QACombo(String.Join("|", nextQuestion));
+                    objectOut = ObjectToByteArray(nextQ);
 
+                    connection.question = nextQ.questionNum;
+                }
+                else
+                {
+                    objectOut = ObjectToByteArray(connection.results);
+                }
             }
             else if (objType == typeof(CurrentStatus))
             {
@@ -136,34 +157,53 @@ namespace QuizService
             }
             else if (objType == typeof(Leaderboard))
             {
-                List<Leaderboard> statusList = new List<Leaderboard>();
-                foreach (var con in connections)
+                List<Leaderboard> leaderBoard = new List<Leaderboard>();
+                foreach (var leader in leaderBoard)
                 {
                     Leaderboard newLeaderboard;
-                    newLeaderboard.name = con.name;
-                    newLeaderboard.score = con.score;
-                    statusList.Add(newLeaderboard);
+                    newLeaderboard.name = leader.name;
+                    newLeaderboard.score = leader.score;
+                    leaderBoard.Add(newLeaderboard);
                 }
-                statusList.OrderBy(o=>o.score).ToList();
-                objectOut = ObjectToByteArray(statusList);
+                leaderBoard.OrderBy(o => o.score).ToList();
+                objectOut = ObjectToByteArray(leaderBoard);
             }
-            else if(objType == typeof(QACombo))
-            {
-                QACombo sendCombo = new QACombo();
-                connection.question++;
-                ////////////////////////////////////////////////////////////
-            }
-            else if(objType == typeof(List<QACombo>))
-            {
-                List<QACombo> sendCombo = new List<QACombo>();
-                ////////////////////////////////////////////////////////////
-
-
-            }
-            else if(objType == typeof(List<ExcelData>))
+            else if (objType == typeof(ExcelData))
             {
                 List<ExcelData> excelDataList = new List<ExcelData>();
-                ////////////////////////////////////////////////////////////////
+                List<List<string>> excelRecords = db.Select("Select questionId, timeLeft from questionattempts");
+                List<List<string>> questionData = db.Select("Select questionNum, question from questions");
+                foreach (List<string> questionRecord in questionData)
+                {
+                    excelDataList.Add(new ExcelData(Convert.ToInt16(questionRecord[0]), questionRecord[1],((IEnumerable<int>)(from excelRecord in excelRecords where excelRecord[0] == questionRecord[0] select Convert.ToInt16(excelRecord[1]))).Average(),
+                       ((double)excelRecords.Select(o => o[0] == questionRecord[0] && o[1] != "0").Count())/ excelRecords.Count()));
+                }
+                objectOut = ObjectToByteArray(excelDataList);
+            }
+            
+            else if (objType == typeof(List<QACombo>))
+            {
+                List<QACombo> QAList = (List<QACombo>)objFromClient;
+                if (QAList.Any())
+                {
+                    db.Delete("DELETE FROM questions");
+                    foreach (var record in QAList)
+                    {
+                        db.Insert("INSERT INTO questionattempts (questionNum,question,ans1,ans2,ans3,ans4,correctAnswer)VALUES("+record.questionNum+","+record.question+","+ record.ans1+ ","+ record.ans2+ ","+ record.ans3+ "," + record.ans4 + ","+ record.correctAnswer+")");
+                    }
+                }
+                else
+                {
+                    List<QACombo> send = new List<QACombo>();
+                    
+                    List<List<string>> thisQuestion = db.Select("Select questionNum,question,ans1,ans2,ans3,ans4,correctAnswer from questions");
+                    foreach (List<string> record in thisQuestion)
+                    {
+                        send.Add(new QACombo(String.Join("|", thisQuestion.Skip(1))));
+                    }
+                    objectOut = ObjectToByteArray(send);
+                }
+
             }
 
             stream.Write(objectOut, 0, objectOut.Length);
@@ -207,11 +247,11 @@ namespace QuizService
                     // You could also user server.AcceptSocket() here.
                     TcpClient client = server.AcceptTcpClient();
                     ClientConnections newConnection = new ClientConnections();
-                    newConnection.answers = new List<string>();
+                    newConnection.results = new List<Result>();
                     newConnection.cSocket = client;
                     newConnection.rTimer = new MyTimer(0,readSocket,newConnection);
                     newConnection.score = 0;
-                    newConnection.question = 0;
+                    newConnection.question = -1;
                     eventLogger.WriteEntry("connection made");
                     Console.WriteLine("Connected!");
 
