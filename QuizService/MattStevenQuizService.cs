@@ -27,9 +27,11 @@ namespace QuizService
             public int question;
             public int score;
             public string name;
+            public List<string> answers;
         }
         EventLog eventLogger;
         List<ClientConnections> connections = new List<ClientConnections>();
+        DB db = new DB();
         public MattStevenQuizService()
         {
             InitializeComponent();
@@ -41,6 +43,7 @@ namespace QuizService
         }
         protected override void OnStart(string[] args)
         {
+            db.OpenConnection();
             eventLogger = new System.Diagnostics.EventLog();
             // Turn off autologging
             this.AutoLog = false;
@@ -102,15 +105,21 @@ namespace QuizService
 
             byte[] objectOut = new byte[0];
 
-            if (objType == typeof(String))
+            if (objType == typeof(String))//client sent name
             {
 
                 connection.name = ((string)objFromClient);
                 objectOut = ObjectToByteArray("Connected");
             }
-            else if (objType == typeof(Answer))
+            else if (objType == typeof(Answer))//client gives you an answer (give them next question or their results)
             {
                 Answer userAnswer = (Answer)objFromClient;
+                if (userAnswer.answer == Convert.ToInt16(db.Select("Select correctAnswer from questions where ID=" + userAnswer.question).First()))
+                {
+
+                }
+                connection.score += userAnswer.timeLeft;
+
             }
             else if (objType == typeof(CurrentStatus))
             {
@@ -198,8 +207,11 @@ namespace QuizService
                     // You could also user server.AcceptSocket() here.
                     TcpClient client = server.AcceptTcpClient();
                     ClientConnections newConnection = new ClientConnections();
+                    newConnection.answers = new List<string>();
                     newConnection.cSocket = client;
                     newConnection.rTimer = new MyTimer(0,readSocket,newConnection);
+                    newConnection.score = 0;
+                    newConnection.question = 0;
                     eventLogger.WriteEntry("connection made");
                     Console.WriteLine("Connected!");
 

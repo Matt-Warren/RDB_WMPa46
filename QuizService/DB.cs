@@ -27,7 +27,7 @@ namespace QuizService
             server = "localhost";
             database = "MattStevenQuiz";
             uid = "root";
-            password = "";
+            password = "root";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -36,11 +36,12 @@ namespace QuizService
         }
 
         //open connection to database
-        private bool OpenConnection()
+        public bool OpenConnection()
         {
             try
             {
                 connection.Open();
+                Console.WriteLine("Connected To Database");
                 return true;
             }
             catch (MySqlException ex)
@@ -53,11 +54,13 @@ namespace QuizService
                 switch (ex.Number)
                 {
                     case 0:
-                        MessageBox.Show("Cannot connect to server.  Contact administrator");
+                        Console.WriteLine("connection to DB failed");
+                        //MessageBox.Show("Cannot connect to server.  Contact administrator");
                         break;
 
                     case 1045:
-                        MessageBox.Show("Invalid username/password, please try again");
+                        Console.WriteLine("Username/pass failed");
+                        //MessageBox.Show("Invalid username/password, please try again");
                         break;
                 }
                 return false;
@@ -65,7 +68,7 @@ namespace QuizService
         }
 
         //Close connection
-        private bool CloseConnection()
+        public bool CloseConnection()
         {
             try
             {
@@ -74,7 +77,7 @@ namespace QuizService
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
                 return false;
             }
         }
@@ -135,15 +138,12 @@ namespace QuizService
         }
 
         //Select statement
-        public List<string>[] Select()
+        public List<List<string>> Select(string query)
         {
-            string query = "SELECT * FROM tableinfo";
+            //"SELECT * FROM tableinfo";
 
             //Create a list to store the result
-            List<string>[] list = new List<string>[3];
-            list[0] = new List<string>();
-            list[1] = new List<string>();
-            list[2] = new List<string>();
+            List<List<string>> list = new List<List<string>>();
 
             //Open connection
             if (this.OpenConnection() == true)
@@ -156,9 +156,12 @@ namespace QuizService
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["id"] + "");
-                    list[1].Add(dataReader["name"] + "");
-                    list[2].Add(dataReader["age"] + "");
+                    List<string> record = new List<string>();
+                    for (int i = 0; i < dataReader.FieldCount; i++)
+                    {
+                        record.Add((string)dataReader[i]);
+                    }
+                    list.Add(record);
                 }
 
                 //close Data Reader
@@ -176,5 +179,4 @@ namespace QuizService
             }
         }
     }
-}
 }
