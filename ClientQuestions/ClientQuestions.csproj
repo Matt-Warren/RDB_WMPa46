@@ -80,9 +80,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QACombo\QACombo.csproj">
-      <Project>{c2c7b501-043c-41a8-acf6-c153ebac6942}</Project>
-      <Name>QACombo</Name>
+    <ProjectReference Include="..\ClientServerLibrary\ClientServerLibrary.csproj">
+      <Project>{703050ed-3135-4707-9624-77d0808403c4}</Project>
+      <Name>ClientServerLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
