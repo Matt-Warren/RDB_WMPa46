@@ -90,17 +90,19 @@ namespace ClientQuestions
 
         public void GetNextQuestion()
         {
-            
             lblQuestionText.Text = "Getting new question...";
-            tmrTimeLeft.Enabled = false;
-
 
             try //to get a new question
             {
                 Int32 port = Convert.ToInt32(portStr);
                 client = new TcpClient(server, port);
 
-                Byte[] data = ObjectToByteArray(new QACombo());
+                Answer ans = new Answer();
+                ans.answer = cbAnswer_1.Checked == true ? 1 : cbAnswer_2.Checked == true ? 2 : cbAnswer_3.Checked == true ? 3 : 4;
+                ans.question = questionNumber;
+                ans.timeLeft = Convert.ToInt32(lblTimeLeft.Text);
+
+                Byte[] data = ObjectToByteArray(ans);
 
                 stream = client.GetStream();
 
@@ -130,6 +132,10 @@ namespace ClientQuestions
                     currentQA.ans4 = ((QACombo)objFromClient).ans4;
                     currentQA.correctAnswer = ((QACombo)objFromClient).correctAnswer;
                     setQAText();
+                }
+                else if(objType == typeof(List<Result>))
+                {
+                    pEndQuestions.Visible = true;
                 }
             }
             catch (ArgumentNullException e)
@@ -182,15 +188,9 @@ namespace ClientQuestions
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            bool correct = currentQA.checkAnswer(cbAnswer_1.Checked == true ? 1 : cbAnswer_2.Checked == true ? 2 : cbAnswer_3.Checked == true ? 3 : 4 );
-            int timeLeft = Convert.ToInt32(lblTimeLeft.Text);
-
             btnSubmit.Enabled = false;
             uncheckOthers(checkBoxes.ALL);
-
-            //send correct and timeLeft to the service to score points
-
-            lblTimeLeft.Text = Convert.ToString(timeLeft);
+            tmrTimeLeft.Enabled = false;
             GetNextQuestion();
 
             //send back to service here
@@ -240,6 +240,7 @@ namespace ClientQuestions
                 GetNextQuestion();
             }
         }
+
         public static byte[] ObjectToByteArray(Object obj)
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -249,5 +250,6 @@ namespace ClientQuestions
                 return ms.ToArray();
             }
         }
+        
     }
 }

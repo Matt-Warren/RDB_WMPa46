@@ -10,6 +10,7 @@ namespace ClientServerLibrary
     {
         public int question;
         public int answer;
+        public int timeLeft;
     }
     public struct CurrentStatus
     {
@@ -22,5 +23,13 @@ namespace ClientServerLibrary
         public string name;
         public int score;
 
+    }
+
+    public struct Result
+    {
+        public int questionNumber;
+        public string question;
+        public string actualAnswer;
+        public string theirAnswer;
     }
 }
