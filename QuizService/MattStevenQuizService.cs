@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceProcess;
 using ClientServerLibrary;
+using ClientServerLibrary.messageStructures;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -24,6 +25,7 @@ namespace QuizService
             public MyTimer wTimer;
             public string userType;
             public int question;
+            public int score;
             public string name;
         }
         EventLog eventLogger;
@@ -93,37 +95,63 @@ namespace QuizService
             object objFromClient = bformatter.Deserialize(fullObjectStream);
             Type objType = objFromClient.GetType();
 
-            byte[] objectOut;
+            byte[] objectOut = new byte[0];
 
             if (objType == typeof(String))
             {
 
-                connection.name  = ((string)objFromClient);
+                connection.name = ((string)objFromClient);
                 objectOut = ObjectToByteArray("Connected");
-                stream.Write(objectOut, 0, objectOut.Length);
             }
             else if (objType == typeof(Answer))
             {
-
+                Answer userAnswer = (Answer)objFromClient;
             }
             else if (objType == typeof(CurrentStatus))
             {
+                List<CurrentStatus> statusList = new List<CurrentStatus>();
+                foreach (var con in connections)
+                {
+                    CurrentStatus newStatus;
+                    newStatus.name = con.name;
+                    newStatus.score = con.score;
+                    newStatus.questionNum = con.question;
+                    statusList.Add(newStatus);
+                }
+                objectOut = ObjectToByteArray(statusList);
             }
             else if (objType == typeof(Leaderboard))
             {
+                List<Leaderboard> statusList = new List<Leaderboard>();
+                foreach (var con in connections)
+                {
+                    Leaderboard newLeaderboard;
+                    newLeaderboard.name = con.name;
+                    newLeaderboard.score = con.score;
+                    statusList.Add(newLeaderboard);
+                }
+                statusList.OrderBy(o=>o.score).ToList();
+                objectOut = ObjectToByteArray(statusList);
+            }
+            else if(objType == typeof(QACombo))
+            {
+                QACombo sendCombo = new QACombo();
+                ////////////////////////////////////////////////////////////
             }
             else if(objType == typeof(List<QACombo>))
             {
-            
+                List<QACombo> sendCombo = new List<QACombo>();
+                ////////////////////////////////////////////////////////////
+
+
             }
             else if(objType == typeof(List<ExcelData>))
             {
-            
+                List<ExcelData> excelDataList = new List<ExcelData>();
+                ////////////////////////////////////////////////////////////////
             }
-            else if(objType == typeof(List<int>))
-            {
-            
-            }
+
+            stream.Write(objectOut, 0, objectOut.Length);
             //fullObjectBytes = listObject.Join();
 
             ////////////////////////////////////////////////////////////////////////////////////////////data = string recived
