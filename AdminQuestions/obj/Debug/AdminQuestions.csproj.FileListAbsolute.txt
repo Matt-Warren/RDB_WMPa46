@@ -42,7 +42,7 @@ C:\Users\mwarren\Desktop\Git\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.
 C:\Users\mwarren\Desktop\Git\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.pdb
 C:\Users\mwarren\Desktop\Git\RDB_WMPa46\AdminQuestions\bin\Debug\ClientServerLibrary.dll
 C:\Users\mwarren\Desktop\Git\RDB_WMPa46\AdminQuestions\bin\Debug\ClientServerLibrary.pdb
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.exe.config
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.csproj.ResolveComReference.cache
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.exe
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.pdb
+C:\Users\wheat\Documents\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.exe.config
+C:\Users\wheat\Documents\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.csproj.ResolveComReference.cache
+C:\Users\wheat\Documents\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.exe
+C:\Users\wheat\Documents\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.pdb
