@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClientServerLibrary
 {
+    [Serializable]
     public class ExcelData
     {
         public int questionNumber;
