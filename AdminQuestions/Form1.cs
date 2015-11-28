@@ -84,13 +84,25 @@ namespace AdminQuestions
                     MessageBox.Show((string)objFromServer);
                 }
             }
-            catch (ArgumentNullException ae)
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("ArgumentNullException: " + ae.Message);
+                Console.WriteLine("ArgumentNullException: {0}", ex);
+                stream.Close();
             }
-            catch (SocketException se)
+            catch (SocketException ex)
             {
-                MessageBox.Show("SocketException:" + se.Message);
+                Console.WriteLine("SocketException: {0}", ex);
+                stream.Close();
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine("IOException: {0}", ex);
+                stream.Close();
+            }
+            catch (SerializationException ex)
+            {
+                Console.WriteLine("SerializationException: {0}", ex);
+                stream.Close();
             }
         }
 
@@ -181,13 +193,25 @@ namespace AdminQuestions
                     questionsList = (List<QACombo>)objFromServer;
                 }
             }
-            catch (ArgumentNullException ae)
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("ArgumentNullException: " + ae.Message);
+                Console.WriteLine("ArgumentNullException: {0}", ex);
+                stream.Close();
             }
-            catch (SocketException se)
+            catch (SocketException ex)
             {
-                MessageBox.Show("SocketException: " +  se.Message);
+                Console.WriteLine("SocketException: {0}", ex);
+                stream.Close();
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine("IOException: {0}", ex);
+                stream.Close();
+            }
+            catch (SerializationException ex)
+            {
+                Console.WriteLine("SerializationException: {0}", ex);
+                stream.Close();
             }
 
             lbQuestions.Items.Clear(); //remove all items each time
@@ -218,13 +242,25 @@ namespace AdminQuestions
                 stream.Write(data, 0, data.Length);
 
             }
-            catch(ArgumentNullException ae)
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("ArgumentNullException: " + ae.Message);
+                Console.WriteLine("ArgumentNullException: {0}", ex);
+                stream.Close();
             }
-            catch(SocketException se)
+            catch (SocketException ex)
             {
-                MessageBox.Show("SocketException: " + se.Message);
+                Console.WriteLine("SocketException: {0}", ex);
+                stream.Close();
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine("IOException: {0}", ex);
+                stream.Close();
+            }
+            catch (SerializationException ex)
+            {
+                Console.WriteLine("SerializationException: {0}", ex);
+                stream.Close();
             }
 
             pEditQA.Visible = false;
@@ -417,11 +453,8 @@ namespace AdminQuestions
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnLeaderboard_Click(object sender, EventArgs e)
         {
-            
             try
             {
-
-
                 Byte[] data = ObjectToByteArray(new Leaderboard());
 
                 stream = server.GetStream();
@@ -447,13 +480,25 @@ namespace AdminQuestions
                     currLeaderList = (List<Leaderboard>)objFromServer;
                 }
             }
-            catch (ArgumentNullException ae)
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("ArgumentNullException: " + ae.Message);
+                Console.WriteLine("ArgumentNullException: {0}", ex);
+                stream.Close();
             }
-            catch (SocketException se)
+            catch (SocketException ex)
             {
-                MessageBox.Show("SocketException: " + se.Message);
+                Console.WriteLine("SocketException: {0}", ex);
+                stream.Close();
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine("IOException: {0}", ex);
+                stream.Close();
+            }
+            catch (SerializationException ex)
+            {
+                Console.WriteLine("SerializationException: {0}", ex);
+                stream.Close();
             }
             dgLeader.Rows.Clear();
             foreach (Leaderboard current in currLeaderList)
@@ -498,13 +543,25 @@ namespace AdminQuestions
                     currStatList = (List<CurrentStatus>)objFromServer;
                 }
             }
-            catch (ArgumentNullException ae)
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("ArgumentNullException: " + ae.Message);
+                Console.WriteLine("ArgumentNullException: {0}", ex);
+                stream.Close();
             }
-            catch (SocketException se)
+            catch (SocketException ex)
             {
-                MessageBox.Show("SocketException: " + se.Message);
+                Console.WriteLine("SocketException: {0}", ex);
+                stream.Close();
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine("IOException: {0}", ex);
+                stream.Close();
+            }
+            catch (SerializationException ex)
+            {
+                Console.WriteLine("SerializationException: {0}", ex);
+                stream.Close();
             }
             dgStatus.Rows.Clear();
             foreach (CurrentStatus current in currStatList)
@@ -575,13 +632,26 @@ namespace AdminQuestions
                     excelList = (List<ExcelData>)objFromServer;
                 }
             }
-            catch(ArgumentNullException ae)
+
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show("ArgumentNullException: ", ae.Message);
+                Console.WriteLine("ArgumentNullException: {0}", ex);
+                stream.Close();
             }
-            catch(SocketException se)
+            catch (SocketException ex)
             {
-                MessageBox.Show("SocketException: ", se.Message);
+                Console.WriteLine("SocketException: {0}", ex);
+                stream.Close();
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine("IOException: {0}", ex);
+                stream.Close();
+            }
+            catch (SerializationException ex)
+            {
+                Console.WriteLine("SerializationException: {0}", ex);
+                stream.Close();
             }
             BinaryFormatter formatter = new BinaryFormatter();
             
@@ -676,12 +746,12 @@ namespace AdminQuestions
                     Marshal.FinalReleaseComObject(xlCharts);
                     xlCharts = null;
                 }
-                if(myChart = null)
+                if(myChart != null)
                 {
                     Marshal.FinalReleaseComObject(myChart);
                     myChart = null;
                 }
-                if(chartPage = null)
+                if(chartPage != null)
                 {
                     Marshal.FinalReleaseComObject(chartPage);
                     chartPage = null;
