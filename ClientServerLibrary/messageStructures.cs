@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+*   FILE: messageStructures.cs
+*   NAME: Steven Johnston & Matt Warren
+*   DATE: 2015/11/27
+*   DESC: Used to hold the various structures that are passed between the client/admin and the service.
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
