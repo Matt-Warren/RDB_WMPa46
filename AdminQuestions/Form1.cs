@@ -11,7 +11,7 @@ using ClientServerLibrary;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
-//using Excel = Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Net.Sockets;
@@ -92,11 +92,6 @@ namespace AdminQuestions
             catch (SocketException ex)
             {
                 Console.WriteLine("SocketException: {0}", ex);
-                stream.Close();
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
                 stream.Close();
             }
             catch (SerializationException ex)
@@ -209,11 +204,6 @@ namespace AdminQuestions
                 Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
-                stream.Close();
-            }
             catch (SerializationException ex)
             {
                 Console.WriteLine("SerializationException: {0}", ex);
@@ -262,11 +252,6 @@ namespace AdminQuestions
             catch (SocketException ex)
             {
                 Console.WriteLine("SocketException: {0}", ex);
-                stream.Close();
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
                 stream.Close();
             }
             catch (SerializationException ex)
@@ -508,20 +493,10 @@ namespace AdminQuestions
                 Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
-                stream.Close();
-            }
             catch (SerializationException ex)
             {
                 Console.WriteLine("SerializationException: {0}", ex);
                 stream.Close();
-            }
-            dgLeader.Rows.Clear();
-            foreach (Leaderboard current in currLeaderList)
-            {
-                dgLeader.Rows.Add(current.name, current.score); //sets up the datagrid
             }
             catch (IOException io)
             {
@@ -529,6 +504,12 @@ namespace AdminQuestions
                 stream.Close();
                 this.Close();
             }
+            dgLeader.Rows.Clear();
+            foreach (Leaderboard current in currLeaderList)
+            {
+                dgLeader.Rows.Add(current.name, current.score); //sets up the datagrid
+            }
+            
 
             pLeaderboard.Visible = true;
             pLeaderboard.BringToFront();
@@ -574,11 +555,6 @@ namespace AdminQuestions
             catch (SocketException ex)
             {
                 Console.WriteLine("SocketException: {0}", ex);
-                stream.Close();
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
                 stream.Close();
             }
             catch (SerializationException ex)
@@ -672,11 +648,6 @@ namespace AdminQuestions
                 Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
-                stream.Close();
-            }
             catch (SerializationException ex)
             {
                 Console.WriteLine("SerializationException: {0}", ex);
@@ -689,7 +660,7 @@ namespace AdminQuestions
                 this.Close();
             }
             BinaryFormatter formatter = new BinaryFormatter();
-            /*
+            
             object missing = Type.Missing;
             Excel.Application oXL = null;
             Excel.Workbooks oWBs = null;
@@ -816,7 +787,7 @@ namespace AdminQuestions
                     Marshal.FinalReleaseComObject(oXL);
                     oXL = null;
                 }
-            }*/
+            }
             
         }
 
