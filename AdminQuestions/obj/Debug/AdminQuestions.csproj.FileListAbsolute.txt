@@ -50,3 +50,11 @@ C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQ
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.csproj.ResolveComReference.cache
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.exe
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.pdb
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.csprojResolveAssemblyReference.cache
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.mainForm.resources
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.Properties.Resources.resources
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\obj\Debug\AdminQuestions.csproj.GenerateResource.Cache
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.exe
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\bin\Debug\AdminQuestions.pdb
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\bin\Debug\ClientServerLibrary.dll
+C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\AdminQuestions\bin\Debug\ClientServerLibrary.pdb
