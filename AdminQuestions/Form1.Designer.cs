@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnEditQA = new System.Windows.Forms.Button();
             this.btnStatus = new System.Windows.Forms.Button();
             this.btnLeaderboard = new System.Windows.Forms.Button();
@@ -70,6 +71,7 @@
             this.lblServer = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.txtServer = new System.Windows.Forms.TextBox();
+            this.tmrRefreshStatus = new System.Windows.Forms.Timer(this.components);
             this.pEditQA.SuspendLayout();
             this.pLeaderboard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLeader)).BeginInit();
@@ -485,6 +487,11 @@
             this.txtServer.TabIndex = 1;
             this.txtServer.Text = "192.168.0.10";
             // 
+            // tmrRefreshStatus
+            // 
+            this.tmrRefreshStatus.Interval = 1000;
+            this.tmrRefreshStatus.Tick += new System.EventHandler(this.UpdateStatus);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -556,6 +563,7 @@
         private System.Windows.Forms.Label lblServer;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.TextBox txtServer;
+        private System.Windows.Forms.Timer tmrRefreshStatus;
     }
 }
 

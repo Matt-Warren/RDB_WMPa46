@@ -32,7 +32,8 @@ namespace AdminQuestions
 
         // The list of all the questions in the database
         public List<QACombo> questionsList = new List<QACombo>();
-
+        List<Leaderboard> currLeaderList = new List<Leaderboard>();
+        List<CurrentStatus> currStatList = new List<CurrentStatus>();
 
         // Enumeration of the possible check boxes for question answers
         enum checkBoxes
@@ -416,10 +417,10 @@ namespace AdminQuestions
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnLeaderboard_Click(object sender, EventArgs e)
         {
-            List<Leaderboard> currLeaderList = new List<Leaderboard>();
+            
             try
             {
-                
+
 
                 Byte[] data = ObjectToByteArray(new Leaderboard());
 
@@ -446,20 +447,20 @@ namespace AdminQuestions
                     currLeaderList = (List<Leaderboard>)objFromServer;
                 }
             }
-            catch(ArgumentNullException ae)
+            catch (ArgumentNullException ae)
             {
                 MessageBox.Show("ArgumentNullException: " + ae.Message);
             }
-            catch(SocketException se)
+            catch (SocketException se)
             {
                 MessageBox.Show("SocketException: " + se.Message);
             }
-
             dgLeader.Rows.Clear();
             foreach (Leaderboard current in currLeaderList)
             {
                 dgLeader.Rows.Add(current.name, current.score); //sets up the datagrid
             }
+
 
             pLeaderboard.Visible = true;
             pLeaderboard.BringToFront();
@@ -467,24 +468,8 @@ namespace AdminQuestions
 
         }
 
-        /// <summary>
-        /// Handles the Click event of the btnLeaderboardBack control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btnLeaderboardBack_Click(object sender, EventArgs e)
+        public void UpdateStatus(object sender, EventArgs e)
         {
-            pLeaderboard.Visible = false;
-        }
-
-        /// <summary>
-        /// Handles the Click event of the btnStatus control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btnStatus_Click(object sender, EventArgs e)
-        {
-            List<CurrentStatus> currStatList = new List<CurrentStatus>(); //put statuss in here
             try
             {
 
@@ -513,19 +498,43 @@ namespace AdminQuestions
                     currStatList = (List<CurrentStatus>)objFromServer;
                 }
             }
-            catch(ArgumentNullException ae)
+            catch (ArgumentNullException ae)
             {
                 MessageBox.Show("ArgumentNullException: " + ae.Message);
             }
-            catch(SocketException se)
+            catch (SocketException se)
             {
                 MessageBox.Show("SocketException: " + se.Message);
             }
             dgStatus.Rows.Clear();
-            foreach(CurrentStatus current in currStatList)
+            foreach (CurrentStatus current in currStatList)
             {
                 dgStatus.Rows.Add(current.name, current.questionNum, current.score); //sets up the datagrid
             }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnLeaderboardBack control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void btnLeaderboardBack_Click(object sender, EventArgs e)
+        {
+            tmrRefreshStatus.Enabled = false;
+            pLeaderboard.Visible = false;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnStatus control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void btnStatus_Click(object sender, EventArgs e)
+        {
+            tmrRefreshStatus.Enabled = true;
+            UpdateStatus(sender, e);
+
+           
             pStatus.Visible = true;
             pStatus.BringToFront();
         }
@@ -713,6 +722,7 @@ namespace AdminQuestions
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnStatusBack_Click(object sender, EventArgs e)
         {
+            tmrRefreshStatus.Enabled = false;
             pStatus.Visible = false;
         }
 
