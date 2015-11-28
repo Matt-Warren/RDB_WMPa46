@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+*   FILE: Form1.cs (ClientQuestions)
+*   NAME: Steven Johnston & Matt Warren
+*   DATE: 2015/11/27
+*   DESC: This file is used connect with the service from the client side, with the utilities outlined in the assignment description.
+*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
