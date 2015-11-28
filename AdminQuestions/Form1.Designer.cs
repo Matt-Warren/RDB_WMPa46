@@ -498,7 +498,7 @@
             this.Controls.Add(this.btnEditQA);
             this.Controls.Add(this.pStatus);
             this.Controls.Add(this.pEditQA);
-            this.Name = "mainForm";
+            //this.Name = "mainForm";
             this.Text = "Admin";
             this.pEditQA.ResumeLayout(false);
             this.pEditQA.PerformLayout();
