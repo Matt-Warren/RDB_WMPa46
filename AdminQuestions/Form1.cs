@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+*   FILE: Form1.cs (AdminQuestions)
+*   NAME: Steven Johnston & Matt Warren
+*   DATE: 2015/11/27
+*   DESC: This file is used connect with the service from the admin side, with the utilities outlined in the assignment description.
+*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -94,15 +100,16 @@ namespace AdminQuestions
                 Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
-                stream.Close();
-            }
             catch (SerializationException ex)
             {
                 Console.WriteLine("SerializationException: {0}", ex);
                 stream.Close();
+            }
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
             }
         }
 
@@ -203,15 +210,16 @@ namespace AdminQuestions
                 Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
-                stream.Close();
-            }
             catch (SerializationException ex)
             {
                 Console.WriteLine("SerializationException: {0}", ex);
                 stream.Close();
+            }
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
             }
 
             lbQuestions.Items.Clear(); //remove all items each time
@@ -252,15 +260,16 @@ namespace AdminQuestions
                 Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
-                stream.Close();
-            }
             catch (SerializationException ex)
             {
                 Console.WriteLine("SerializationException: {0}", ex);
                 stream.Close();
+            }
+            catch(IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
             }
 
             pEditQA.Visible = false;
@@ -490,22 +499,23 @@ namespace AdminQuestions
                 Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
-                stream.Close();
-            }
             catch (SerializationException ex)
             {
                 Console.WriteLine("SerializationException: {0}", ex);
                 stream.Close();
+            }
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
             }
             dgLeader.Rows.Clear();
             foreach (Leaderboard current in currLeaderList)
             {
                 dgLeader.Rows.Add(current.name, current.score); //sets up the datagrid
             }
-
+            
 
             pLeaderboard.Visible = true;
             pLeaderboard.BringToFront();
@@ -553,15 +563,16 @@ namespace AdminQuestions
                 Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
-                stream.Close();
-            }
             catch (SerializationException ex)
             {
                 Console.WriteLine("SerializationException: {0}", ex);
                 stream.Close();
+            }
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
             }
             dgStatus.Rows.Clear();
             foreach (CurrentStatus current in currStatList)
@@ -643,15 +654,16 @@ namespace AdminQuestions
                 Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IOException: {0}", ex);
-                stream.Close();
-            }
             catch (SerializationException ex)
             {
                 Console.WriteLine("SerializationException: {0}", ex);
                 stream.Close();
+            }
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
             }
             BinaryFormatter formatter = new BinaryFormatter();
             
