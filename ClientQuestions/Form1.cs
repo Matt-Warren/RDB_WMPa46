@@ -11,6 +11,7 @@ using ClientServerLibrary;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace ClientQuestions
 {
@@ -97,9 +98,9 @@ namespace ClientQuestions
                 //Int32 port = Convert.ToInt32(portStr);
                 //client = new TcpClient(server, port);
                 Answer ans = new Answer();
-                    ans.answer = cbAnswer_1.Checked == true ? 1 : cbAnswer_2.Checked == true ? 2 : cbAnswer_3.Checked == true ? 3 : 4;
-                    ans.question = questionNumber;
-                    ans.timeLeft = Convert.ToInt32(lblTimeLeft.Text);
+                ans.answer = cbAnswer_1.Checked == true ? 1 : cbAnswer_2.Checked == true ? 2 : cbAnswer_3.Checked == true ? 3 : 4;
+                ans.question = questionNumber;
+                ans.timeLeft = Convert.ToInt32(lblTimeLeft.Text);
 
                 Byte[] data = ObjectToByteArray(ans);
 
@@ -111,7 +112,7 @@ namespace ClientQuestions
                 List<byte[]> listObject = new List<byte[]>();
                 byte[] bytes = new byte[8192];
                 byte[] fullObjectBytes;// = new byte[8192];
-                
+
                 // Loop to receive all the data sent by the client.
                 stream.Read(bytes, 0, bytes.Length);
                 listObject.Add(bytes);
@@ -125,12 +126,6 @@ namespace ClientQuestions
                 if (objType == typeof(QACombo))
                 {
                     currentQA = (QACombo)objFromServer;
-                    /*currentQA.question = ((QACombo)objFromClient).question;
-                    currentQA.ans1 = ((QACombo)objFromClient).ans1;
-                    currentQA.ans2 = ((QACombo)objFromClient).ans2;
-                    currentQA.ans3 = ((QACombo)objFromClient).ans3;
-                    currentQA.ans4 = ((QACombo)objFromClient).ans4;
-                    currentQA.correctAnswer = ((QACombo)objFromClient).correctAnswer;*/
                     setQAText();
                 }
                 else if (objType == typeof(List<Result>))
@@ -149,31 +144,47 @@ namespace ClientQuestions
                         txtResults.Text += "\r\n#" + result.questionNumber + "\r\nQuestion: " + result.question + "\r\n Your answer: " + result.theirAnswer + "\r\n Correct answer: " + result.actualAnswer;
                     }
                     data = ObjectToByteArray(new Leaderboard());
-                    stream.Write(data,0, data.Length);
+                    stream.Write(data, 0, data.Length);
 
-                }
-                else if (objType == typeof(List<Leaderboard>))
-                {
+                    stream.Read(bytes, 0, bytes.Length);
+                    listObject.Add(bytes);
+
+                    fullObjectBytes = bytes;
+
+                    fullObjectStream = new MemoryStream(fullObjectBytes);
+                    objFromServer = bformatter.Deserialize(fullObjectStream);
+                    objType = objFromServer.GetType();
+
                     txtResults.Clear();
                     List<Leaderboard> leaderboards = (List<Leaderboard>)objFromServer;
                     int count = 1;
                     foreach (var leaderboard in leaderboards)
                     {
-                        txtResults.Text += "#" + count++ +  " " + leaderboard.name + " " + leaderboard.score + "\r\n";
+                        txtResults.Text += "#" + count++ + " " + leaderboard.name + " " + leaderboard.score + "\r\n";
                     }
-
+                    stream.Close();
                 }
 
             }
             catch (ArgumentNullException e)
             {
                 Console.WriteLine("ArgumentNullException: {0}", e);
+                stream.Close();
             }
             catch (SocketException e)
             {
                 Console.WriteLine("SocketException: {0}", e);
+                stream.Close();
             }
-            
+            catch (IOException)
+            {
+                stream.Close();
+            }
+            catch (SerializationException e)
+            {
+                stream.Close();
+            }
+
             lblTimeLeft.Text = "20";
             tmrTimeLeft.Enabled = true;
         }
