@@ -94,13 +94,12 @@ namespace ClientQuestions
 
             try //to get a new question
             {
-                Int32 port = Convert.ToInt32(portStr);
-                client = new TcpClient(server, port);
-
+                //Int32 port = Convert.ToInt32(portStr);
+                //client = new TcpClient(server, port);
                 Answer ans = new Answer();
-                ans.answer = cbAnswer_1.Checked == true ? 1 : cbAnswer_2.Checked == true ? 2 : cbAnswer_3.Checked == true ? 3 : 4;
-                ans.question = questionNumber;
-                ans.timeLeft = Convert.ToInt32(lblTimeLeft.Text);
+                    ans.answer = cbAnswer_1.Checked == true ? 1 : cbAnswer_2.Checked == true ? 2 : cbAnswer_3.Checked == true ? 3 : 4;
+                    ans.question = questionNumber;
+                    ans.timeLeft = Convert.ToInt32(lblTimeLeft.Text);
 
                 Byte[] data = ObjectToByteArray(ans);
 
@@ -120,23 +119,51 @@ namespace ClientQuestions
                 var bformatter = new BinaryFormatter();
                 fullObjectBytes = bytes;
                 Stream fullObjectStream = new MemoryStream(fullObjectBytes);
-                object objFromClient = bformatter.Deserialize(fullObjectStream);
-                Type objType = objFromClient.GetType();
+                object objFromServer = bformatter.Deserialize(fullObjectStream);
+                Type objType = objFromServer.GetType();
 
                 if (objType == typeof(QACombo))
                 {
-                    currentQA.question = ((QACombo)objFromClient).question;
+                    currentQA = (QACombo)objFromServer;
+                    /*currentQA.question = ((QACombo)objFromClient).question;
                     currentQA.ans1 = ((QACombo)objFromClient).ans1;
                     currentQA.ans2 = ((QACombo)objFromClient).ans2;
                     currentQA.ans3 = ((QACombo)objFromClient).ans3;
                     currentQA.ans4 = ((QACombo)objFromClient).ans4;
-                    currentQA.correctAnswer = ((QACombo)objFromClient).correctAnswer;
+                    currentQA.correctAnswer = ((QACombo)objFromClient).correctAnswer;*/
                     setQAText();
                 }
-                else if(objType == typeof(List<Result>))
+                else if (objType == typeof(List<Result>))
                 {
+                    pAnswers.Visible = false;
+                    pQuestions.Visible = false;
                     pEndQuestions.Visible = true;
+                    pTimeLeft.Visible = false;
+                    pStartScreen.Visible = false;
+                    btnSubmit.Visible = false;
+                    tmrTimeLeft.Enabled = false;
+                    List<Result> results = (List<Result>)objFromServer;
+
+                    foreach (var result in results)
+                    {
+                        txtResults.Text += "\r\n#" + result.questionNumber + "\r\nQuestion: " + result.question + "\r\n Your answer: " + result.theirAnswer + "\r\n Correct answer: " + result.actualAnswer;
+                    }
+                    data = ObjectToByteArray(new Leaderboard());
+                    stream.Write(data,0, data.Length);
+
                 }
+                else if (objType == typeof(List<Leaderboard>))
+                {
+                    txtResults.Clear();
+                    List<Leaderboard> leaderboards = (List<Leaderboard>)objFromServer;
+                    int count = 1;
+                    foreach (var leaderboard in leaderboards)
+                    {
+                        txtResults.Text += "#" + count++ +  " " + leaderboard.name + " " + leaderboard.score + "\r\n";
+                    }
+
+                }
+
             }
             catch (ArgumentNullException e)
             {
@@ -189,9 +216,10 @@ namespace ClientQuestions
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             btnSubmit.Enabled = false;
-            uncheckOthers(checkBoxes.ALL);
             tmrTimeLeft.Enabled = false;
             GetNextQuestion();
+
+            uncheckOthers(checkBoxes.ALL);
         }
 
         private void cbClicked(object sender, EventArgs e)
@@ -247,6 +275,10 @@ namespace ClientQuestions
                 return ms.ToArray();
             }
         }
-        
+
+        private void btnLeader_Click(object sender, EventArgs e)
+        {
+            GetNextQuestion();
+        }
     }
 }

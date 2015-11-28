@@ -25,7 +25,7 @@ namespace QuizService
         private void Initialize()
         {
             server = "localhost";
-            database = "MattStevenQuiz";
+            database = "mattstevenquiz";
             uid = "root";
             password = "root";
             string connectionString;
@@ -159,7 +159,7 @@ namespace QuizService
                     List<string> record = new List<string>();
                     for (int i = 0; i < dataReader.FieldCount; i++)
                     {
-                        record.Add((string)dataReader[i]);
+                        record.Add(dataReader[i].ToString());
                     }
                     list.Add(record);
                 }
