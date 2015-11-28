@@ -454,9 +454,8 @@ namespace AdminQuestions
             {
                 MessageBox.Show("SocketException: " + se.Message);
             }
-            
-            dgLeader.SelectAll();
-            dgLeader.ClearSelection();
+
+            dgLeader.Rows.Clear();
             foreach (Leaderboard current in currLeaderList)
             {
                 dgLeader.Rows.Add(current.name, current.score); //sets up the datagrid
@@ -522,8 +521,7 @@ namespace AdminQuestions
             {
                 MessageBox.Show("SocketException: " + se.Message);
             }
-            dgStatus.SelectAll();
-            dgStatus.ClearSelection();
+            dgStatus.Rows.Clear();
             foreach(CurrentStatus current in currStatList)
             {
                 dgStatus.Rows.Add(current.name, current.questionNum, current.score); //sets up the datagrid
