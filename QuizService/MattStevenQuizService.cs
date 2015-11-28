@@ -74,7 +74,6 @@ namespace QuizService
         /// <summary>
         /// Initializes a new instance of the <see cref="MattStevenQuizService"/> class.
         /// </summary>
-        Int32 port = 53512;
         public MattStevenQuizService()
         {
             InitializeComponent();
@@ -93,10 +92,7 @@ namespace QuizService
         /// <param name="args">The arguments.</param>
         protected override void OnStart(string[] args)
         {
-            if (args.Length == 1)
-            {
-                port = Convert.ToInt32(args[0]);
-            }
+            
             //Creates logger 
             eventLogger = new System.Diagnostics.EventLog();
             this.AutoLog = false;
@@ -110,8 +106,8 @@ namespace QuizService
 
             eventLogger.WriteEntry("go");
             //Create a thead for getting new connections
-            MyTimer listenThread = new MyTimer(0, listen, new object());
-            
+            QuizService.MyTimer listenThread = new MyTimer(0, listen, new object());
+            eventLogger.WriteEntry("after");
         }
 
         /// <summary>
@@ -119,10 +115,11 @@ namespace QuizService
         /// </summary>
         protected override void OnStop()
         {
+            //System.Threading.Thread.Sleep(40000);
             //closes all connections
-            foreach (var con in connections)
+            //foreach (var con in connections)
             {
-                con.cSocket.GetStream().Close();
+                //con.cSocket.GetStream().Close();
             }
         }
         /// <summary>
@@ -343,13 +340,20 @@ namespace QuizService
         /// <param name="obj">not used</param>
         private void listen(object obj)
         {
+
+            eventLogger.WriteEntry("stating listen");
             TcpListener server = null;
             try
             {
                 eventLogger.WriteEntry("Starting service");
                 
                 IPAddress localAddr = IPAddress.Parse(GetLocalIPAddress());
+
+                Int32 port = 53512;
                 server = new TcpListener(localAddr, port);
+
+                eventLogger.WriteEntry("after tcplistener");
+
                 server.Start();
                 Byte[] bytes = new Byte[256];
                 while (true)
@@ -357,6 +361,7 @@ namespace QuizService
 
                     eventLogger.WriteEntry("Waiting for connection");
                     Console.Write("Waiting for a connection... ");
+                    eventLogger.WriteEntry(GetLocalIPAddress());
                     Console.Write(GetLocalIPAddress());//gets this computers ip address
                     TcpClient client = server.AcceptTcpClient();
                     //Create new connection for the client that just connected

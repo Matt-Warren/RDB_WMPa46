@@ -9,15 +9,15 @@ C:\Users\sdjohnston\Desktop\repo\QuizService\bin\Debug\ClientServerLibrary.dll
 C:\Users\sdjohnston\Desktop\repo\QuizService\bin\Debug\ClientServerLibrary.pdb
 C:\Users\sdjohnston\Desktop\repo\QuizService\obj\Debug\QuizService.exe
 C:\Users\sdjohnston\Desktop\repo\QuizService\obj\Debug\QuizService.pdb
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.csprojResolveAssemblyReference.cache
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.MattStevenQuizService.resources
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.csproj.GenerateResource.Cache
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\bin\Debug\QuizService.exe.config
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\bin\Debug\QuizService.exe
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\bin\Debug\QuizService.pdb
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\bin\Debug\ClientServerLibrary.dll
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\bin\Debug\MySql.Data.dll
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\bin\Debug\ClientServerLibrary.pdb
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.csprojResolveAssemblyReference.cache
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.MattStevenQuizService.resources
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.ProjectInstaller.resources
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.csproj.GenerateResource.Cache
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.exe
 C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\obj\Debug\QuizService.pdb
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\QuizService\bin\Debug\MySql.Data.dll

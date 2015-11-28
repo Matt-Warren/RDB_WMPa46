@@ -51,3 +51,14 @@ C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\ClientQuestions\obj\Debug\Clien
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.csproj.GenerateResource.Cache
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.exe
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.pdb
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\bin\Debug\ClientQuestions.exe.config
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\bin\Debug\ClientQuestions.exe
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\bin\Debug\ClientQuestions.pdb
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\bin\Debug\ClientServerLibrary.dll
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\bin\Debug\ClientServerLibrary.pdb
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.csprojResolveAssemblyReference.cache
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.mainForm.resources
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.Properties.Resources.resources
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.csproj.GenerateResource.Cache
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.exe
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientQuestions\obj\Debug\ClientQuestions.pdb

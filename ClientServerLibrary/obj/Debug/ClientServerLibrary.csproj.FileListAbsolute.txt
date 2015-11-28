@@ -8,13 +8,12 @@ C:\Users\wheat\Documents\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLi
 C:\Users\wheat\Documents\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.csprojResolveAssemblyReference.cache
 C:\Users\wheat\Documents\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.dll
 C:\Users\wheat\Documents\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.pdb
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.dll
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.pdb
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.csprojResolveAssemblyReference.cache
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.dll
-C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.pdb
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.dll
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.pdb
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.csprojResolveAssemblyReference.cache
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.dll
 C:\Users\Matt\Desktop\Assignments\Git\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.pdb
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.dll
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\bin\Debug\ClientServerLibrary.pdb
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.dll
+C:\Users\Steven Windows7\Source\Repos\RDB_WMPa46\ClientServerLibrary\obj\Debug\ClientServerLibrary.pdb
