@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+*   FILE: QACombo.cs
+*   NAME: Steven Johnston & Matt Warren
+*   DATE: 2015/11/27
+*   DESC: Used to pass question/answers between the service and the client and admin
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
