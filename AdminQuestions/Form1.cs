@@ -11,7 +11,7 @@ using ClientServerLibrary;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Net.Sockets;
@@ -91,6 +91,12 @@ namespace AdminQuestions
             catch (SocketException se)
             {
                 MessageBox.Show("SocketException:" + se.Message);
+            }
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
             }
         }
 
@@ -189,6 +195,12 @@ namespace AdminQuestions
             {
                 MessageBox.Show("SocketException: " +  se.Message);
             }
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
+            }
 
             lbQuestions.Items.Clear(); //remove all items each time
             lbQuestions.Items.Add("Add a new question..."); //set the first thing in the listbox to this to allow the user to reset fields
@@ -225,6 +237,12 @@ namespace AdminQuestions
             catch(SocketException se)
             {
                 MessageBox.Show("SocketException: " + se.Message);
+            }
+            catch(IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
             }
 
             pEditQA.Visible = false;
@@ -460,7 +478,12 @@ namespace AdminQuestions
             {
                 dgLeader.Rows.Add(current.name, current.score); //sets up the datagrid
             }
-
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
+            }
 
             pLeaderboard.Visible = true;
             pLeaderboard.BringToFront();
@@ -505,6 +528,12 @@ namespace AdminQuestions
             catch (SocketException se)
             {
                 MessageBox.Show("SocketException: " + se.Message);
+            }
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
             }
             dgStatus.Rows.Clear();
             foreach (CurrentStatus current in currStatList)
@@ -583,8 +612,14 @@ namespace AdminQuestions
             {
                 MessageBox.Show("SocketException: ", se.Message);
             }
+            catch (IOException io)
+            {
+                MessageBox.Show("IOException: " + io.Message);
+                stream.Close();
+                this.Close();
+            }
             BinaryFormatter formatter = new BinaryFormatter();
-            
+            /*
             object missing = Type.Missing;
             Excel.Application oXL = null;
             Excel.Workbooks oWBs = null;
@@ -676,7 +711,7 @@ namespace AdminQuestions
                     Marshal.FinalReleaseComObject(xlCharts);
                     xlCharts = null;
                 }
-                if(myChart = null)
+                if(myChart != null)
                 {
                     Marshal.FinalReleaseComObject(myChart);
                     myChart = null;
@@ -711,7 +746,7 @@ namespace AdminQuestions
                     Marshal.FinalReleaseComObject(oXL);
                     oXL = null;
                 }
-            }
+            }*/
             
         }
 
