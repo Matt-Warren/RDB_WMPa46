@@ -166,7 +166,7 @@ namespace QuizService
                 }
                 else if (objType == typeof(Leaderboard))
                 {
-                    List<List<string>> leader = db.Select("Select name, score from leaderboard");
+                    List<List<string>> leader = db.Select("Select name, score from leaderboard order by score Desc");
                     List<Leaderboard> leaderBoard = new List<Leaderboard>();
                     foreach (var player in leader)
                     {
@@ -199,7 +199,7 @@ namespace QuizService
                         db.Delete("DELETE FROM questions");
                         foreach (var record in QAList)
                         {
-                            db.Insert("INSERT INTO questionattempts (questionNum,question,ans1,ans2,ans3,ans4,correctAnswer)VALUES(" + record.questionNum + "," + record.question + "," + record.ans1 + "," + record.ans2 + "," + record.ans3 + "," + record.ans4 + "," + record.correctAnswer + ")");
+                            db.Insert("INSERT INTO questions (questionNum,question,ans1,ans2,ans3,ans4,correctAnswer)VALUES(" + record.questionNum + ",'" + record.question + "','" + record.ans1 + "','" + record.ans2 + "','" + record.ans3 + "','" + record.ans4 + "'," + record.correctAnswer + ")");
                         }
                     }
                     else
@@ -209,7 +209,7 @@ namespace QuizService
                         List<List<string>> thisQuestion = db.Select("Select questionNum,question,ans1,ans2,ans3,ans4,correctAnswer from questions");
                         foreach (List<string> record in thisQuestion)
                         {
-                            send.Add(new QACombo(String.Join("|", thisQuestion.Skip(1))));
+                            send.Add(new QACombo(String.Join("|", record)));
                         }
                         objectOut = ObjectToByteArray(send);
                     }
