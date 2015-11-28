@@ -49,12 +49,13 @@
             this.txtServer = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.pEndQuestions = new System.Windows.Forms.Panel();
-            this.txtResults = new System.Windows.Forms.TextBox();
             this.btnLeader = new System.Windows.Forms.Button();
+            this.txtResults = new System.Windows.Forms.TextBox();
             this.pQuestions.SuspendLayout();
             this.pAnswers.SuspendLayout();
             this.pTimeLeft.SuspendLayout();
             this.pStartScreen.SuspendLayout();
+            this.pEndQuestions.SuspendLayout();
             this.SuspendLayout();
             // 
             // pQuestions
@@ -157,7 +158,6 @@
             // 
             // tmrTimeLeft
             // 
-            this.tmrTimeLeft.Enabled = true;
             this.tmrTimeLeft.Interval = 1000;
             this.tmrTimeLeft.Tick += new System.EventHandler(this.tmrTimeLeft_Tick);
             // 
@@ -238,7 +238,6 @@
             // 
             // pEndQuestions
             // 
-
             this.pEndQuestions.Controls.Add(this.btnLeader);
             this.pEndQuestions.Controls.Add(this.txtResults);
             this.pEndQuestions.Location = new System.Drawing.Point(4, 4);
@@ -246,14 +245,6 @@
             this.pEndQuestions.Size = new System.Drawing.Size(511, 353);
             this.pEndQuestions.TabIndex = 6;
             this.pEndQuestions.Visible = false;
-            // 
-            // txtResults
-            // 
-            this.txtResults.Location = new System.Drawing.Point(3, 4);
-            this.txtResults.Multiline = true;
-            this.txtResults.Name = "txtResults";
-            this.txtResults.Size = new System.Drawing.Size(503, 285);
-            this.txtResults.TabIndex = 7;
             // 
             // btnLeader
             // 
@@ -264,6 +255,14 @@
             this.btnLeader.Text = "View Leader Board";
             this.btnLeader.UseVisualStyleBackColor = true;
             this.btnLeader.Click += new System.EventHandler(this.btnLeader_Click);
+            // 
+            // txtResults
+            // 
+            this.txtResults.Location = new System.Drawing.Point(3, 4);
+            this.txtResults.Multiline = true;
+            this.txtResults.Name = "txtResults";
+            this.txtResults.Size = new System.Drawing.Size(503, 285);
+            this.txtResults.TabIndex = 7;
             // 
             // mainForm
             // 
@@ -287,6 +286,8 @@
             this.pTimeLeft.PerformLayout();
             this.pStartScreen.ResumeLayout(false);
             this.pStartScreen.PerformLayout();
+            this.pEndQuestions.ResumeLayout(false);
+            this.pEndQuestions.PerformLayout();
             this.ResumeLayout(false);
 
         }

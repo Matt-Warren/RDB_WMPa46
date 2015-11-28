@@ -95,6 +95,8 @@ namespace ClientQuestions
 
             try //to get a new question
             {
+
+                tmrTimeLeft.Enabled = false;
                 //Int32 port = Convert.ToInt32(portStr);
                 //client = new TcpClient(server, port);
                 Answer ans = new Answer();
@@ -125,64 +127,67 @@ namespace ClientQuestions
 
                 if (objType == typeof(QACombo))
                 {
+
                     currentQA = (QACombo)objFromServer;
                     setQAText();
+                    tmrTimeLeft.Enabled = true;
                 }
                 else if (objType == typeof(List<Result>))
                 {
+
                     pAnswers.Visible = false;
                     pQuestions.Visible = false;
                     pEndQuestions.Visible = true;
                     pTimeLeft.Visible = false;
                     pStartScreen.Visible = false;
                     btnSubmit.Visible = false;
-                    tmrTimeLeft.Enabled = false;
+                    
+
                     List<Result> results = (List<Result>)objFromServer;
 
                     foreach (var result in results)
                     {
                         txtResults.Text += "\r\n#" + result.questionNumber + "\r\nQuestion: " + result.question + "\r\n Your answer: " + result.theirAnswer + "\r\n Correct answer: " + result.actualAnswer;
                     }
-                    data = ObjectToByteArray(new Leaderboard());
-                    stream.Write(data, 0, data.Length);
-
-                    stream.Read(bytes, 0, bytes.Length);
-                    listObject.Add(bytes);
-
-                    fullObjectBytes = bytes;
-
-                    fullObjectStream = new MemoryStream(fullObjectBytes);
-                    objFromServer = bformatter.Deserialize(fullObjectStream);
-                    objType = objFromServer.GetType();
-
-                    txtResults.Clear();
-                    List<Leaderboard> leaderboards = (List<Leaderboard>)objFromServer;
-                    int count = 1;
-                    foreach (var leaderboard in leaderboards)
-                    {
-                        txtResults.Text += "#" + count++ + " " + leaderboard.name + " " + leaderboard.score + "\r\n";
-                    }
-                    stream.Close();
+                    
                 }
 
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException ex)
             {
-                Console.WriteLine("ArgumentNullException: {0}", e);
+
+                MessageBox.Show("InvalidOperationException: {0}", ex.Message);
+                Console.WriteLine("ArgumentNullException: {0}", ex);
                 stream.Close();
+                this.Close();
             }
-            catch (SocketException e)
+            catch (SocketException ex)
             {
-                Console.WriteLine("SocketException: {0}", e);
+                MessageBox.Show("InvalidOperationException: {0}", ex.Message);
+                Console.WriteLine("SocketException: {0}", ex);
                 stream.Close();
+                this.Close();
             }
-            catch (IOException)
+            catch (IOException ex)
             {
+                MessageBox.Show("InvalidOperationException: {0}", ex.Message);
+                Console.WriteLine("IOException: {0}", ex);
                 stream.Close();
+                this.Close();
             }
-            catch (SerializationException e)
+            catch (SerializationException ex)
             {
+                MessageBox.Show("InvalidOperationException: {0}", ex.Message);
+                Console.WriteLine("SerializationException: {0}", ex);
                 stream.Close();
+                this.Close();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("InvalidOperationException: {0}", ex.Message);
+                Console.WriteLine("InvalidOperationException: {0}", ex);
+                stream.Close();
+                this.Close();
             }
 
             lblTimeLeft.Text = "20";
@@ -273,6 +278,7 @@ namespace ClientQuestions
                 name = txtUsername.Text;
                 pStartScreen.Visible = false;
                 connectToServer();
+                tmrTimeLeft.Enabled = true;
                 GetNextQuestion();
             }
         }
@@ -289,7 +295,59 @@ namespace ClientQuestions
 
         private void btnLeader_Click(object sender, EventArgs e)
         {
-            GetNextQuestion();
+            try {
+                if (btnLeader.Text == "Close")
+                {
+                    this.Close();
+                }
+                else
+                {
+                    List<byte[]> listObject = new List<byte[]>();
+                    byte[] bytes = new byte[8192];
+                    byte[] fullObjectBytes;// = new byte[8192];
+                    var bformatter = new BinaryFormatter();
+                    fullObjectBytes = bytes;
+
+                    byte[] data = ObjectToByteArray(new Leaderboard());
+                    stream.Write(data, 0, data.Length);
+
+
+
+
+                    stream.Read(bytes, 0, bytes.Length);
+                    Stream fullObjectStream = new MemoryStream(fullObjectBytes);
+                    object objFromServer = bformatter.Deserialize(fullObjectStream);
+                    Type objType = objFromServer.GetType();
+                    fullObjectBytes = bytes;
+
+                    fullObjectStream = new MemoryStream(fullObjectBytes);
+                    objFromServer = bformatter.Deserialize(fullObjectStream);
+                    objType = objFromServer.GetType();
+
+                    txtResults.Clear();
+                    List<Leaderboard> leaderboards = (List<Leaderboard>)objFromServer;
+                    int count = 1;
+                    foreach (var leaderboard in leaderboards)
+                    {
+                        txtResults.Text += "#" + count++ + " " + leaderboard.name + " " + leaderboard.score + "\r\n";
+                    }
+
+                    stream.Close();
+                    btnLeader.Text = "Close";
+                }
+            }
+            catch (ArgumentNullException ae)
+            {
+                MessageBox.Show("ArgumentNullException: " + ae.Message);
+                stream.Close();
+                this.Close();
+            }
+            catch (SocketException se)
+            {
+                MessageBox.Show("SocketException: " + se.Message);
+                stream.Close();
+                this.Close();
+            }
         }
     }
 }
