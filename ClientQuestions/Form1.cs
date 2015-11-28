@@ -161,7 +161,7 @@ namespace ClientQuestions
                     pTimeLeft.Visible = false;
                     pStartScreen.Visible = false;
                     btnSubmit.Visible = false;
-                    
+
 
                     List<Result> results = (List<Result>)objFromServer;
 
@@ -188,14 +188,16 @@ namespace ClientQuestions
                     { //print leaderboard
                         txtResults.Text += "#" + count++ + " " + leaderboard.name + " " + leaderboard.score + "\r\n";
                     }
+                }
+            }
             catch (ArgumentNullException ex)
             {
 
                 MessageBox.Show("InvalidOperationException: {0}", ex.Message);
                 Console.WriteLine("ArgumentNullException: {0}", ex);
-                    stream.Close();
+                stream.Close();
                 this.Close();
-                }
+            }
             catch (SocketException ex)
             {
                 MessageBox.Show("InvalidOperationException: {0}", ex.Message);
