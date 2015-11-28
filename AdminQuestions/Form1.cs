@@ -119,12 +119,22 @@ namespace AdminQuestions
                         valid = false;
                         break;
                     }
+                    else
+                    {
+                        valid = true;
+                    }
                     
                 }
                 if (valid)
                 {
                     lowQNumber = x;
+                    break;
                 }
+                
+            }
+            if (!valid)
+            {
+                lowQNumber = numberOfQuestions;
             }
             return lowQNumber;
         }
@@ -187,6 +197,7 @@ namespace AdminQuestions
                 lbQuestions.Items.Add(qac.question); //add the list of questions to the listbox
             }
             pEditQA.Visible = true; //show the edit qa panel
+            pEditQA.BringToFront();
         }
 
         /// <summary>
@@ -452,6 +463,7 @@ namespace AdminQuestions
             }
 
             pLeaderboard.Visible = true;
+            pLeaderboard.BringToFront();
 
 
         }
@@ -517,6 +529,7 @@ namespace AdminQuestions
                 dgStatus.Rows.Add(current.name, current.questionNum, current.score); //sets up the datagrid
             }
             pStatus.Visible = true;
+            pStatus.BringToFront();
         }
 
         /// <summary>
@@ -564,7 +577,7 @@ namespace AdminQuestions
                 MessageBox.Show("SocketException: ", se.Message);
             }
             BinaryFormatter formatter = new BinaryFormatter();
-
+            
             object missing = Type.Missing;
             Excel.Application oXL = null;
             Excel.Workbooks oWBs = null;
@@ -692,7 +705,7 @@ namespace AdminQuestions
                     oXL = null;
                 }
             }
-
+            
         }
 
         /// <summary>
