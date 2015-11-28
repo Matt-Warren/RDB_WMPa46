@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using MySql.Data.MySqlClient;
+using System.Runtime.Serialization;
 
 namespace QuizService
 {
@@ -185,8 +186,33 @@ namespace QuizService
                     List<List<string>> questionData = db.Select("Select questionNum, question from questions");
                     foreach (List<string> questionRecord in questionData)
                     {
-                        excelDataList.Add(new ExcelData(Convert.ToInt16(questionRecord[0]), questionRecord[1], ((IEnumerable<int>)(from excelRecord in excelRecords where excelRecord[0] == questionRecord[0] select Convert.ToInt16(excelRecord[1]))).Average(),
-                           ((double)excelRecords.Select(o => o[0] == questionRecord[0] && o[1] != "0").Count()) / excelRecords.Count()));
+                        int qn = Convert.ToInt16(questionRecord[0]);
+                        string qt = questionRecord[1];
+
+                        double at = 0;// = (from excelRecord in excelRecords where excelRecord[0] == questionRecord[0] select Convert.ToDouble(excelRecord[1])).Average();
+                        int count = 0;
+                        double pc = 0;
+                        foreach (var excelRecord in excelRecords)
+                        {
+                            if (excelRecord[0] == questionRecord[0])
+                            {
+                                at += Convert.ToDouble(excelRecord[1]);
+
+                                if (excelRecord[1] != "0")
+                                {
+                                    pc++;
+                                }
+                                count++;
+                            }
+                        }
+                        at = count != 0 ? at /= count : 0;
+
+                        pc = count != 0 ? pc /= count : 0;
+                        //pc /= count;
+                        pc *= 100;
+                        //= ((double)excelRecords.Select(o => (o[0] == questionRecord[0])? o[1] != "0" ? o :n).Count()) / excelRecords.Count();
+
+                        excelDataList.Add(new ExcelData(qn, qt, at, pc));
                     }
                     objectOut = ObjectToByteArray(excelDataList);
                 }
@@ -197,6 +223,7 @@ namespace QuizService
                     if (QAList.Any())
                     {
                         db.Delete("DELETE FROM questions");
+                        db.Delete("DELETE FROM questionattempts");
                         foreach (var record in QAList)
                         {
                             db.Insert("INSERT INTO questions (questionNum,question,ans1,ans2,ans3,ans4,correctAnswer)VALUES(" + record.questionNum + ",'" + record.question + "','" + record.ans1 + "','" + record.ans2 + "','" + record.ans3 + "','" + record.ans4 + "'," + record.correctAnswer + ")");
@@ -220,10 +247,26 @@ namespace QuizService
             }
             catch (IOException e)
             {
-                
+
                 connection.cSocket.Close();
                 connection.rTimer.stop();
             }
+            catch (SerializationException e)
+            {
+                connection.cSocket.Close();
+                connection.rTimer.stop();
+            }
+            finally
+            {
+                for (int i = 0; i < connections.Count; i++)
+                {
+                    if (connections[i].cSocket.Connected == false)
+                    {
+                        connections.RemoveAt(i);
+                    }
+                }
+            }
+
             //fullObjectBytes = listObject.Join();
 
             ////////////////////////////////////////////////////////////////////////////////////////////data = string recived
@@ -269,7 +312,10 @@ namespace QuizService
                     newConnection.score = 0;
                     newConnection.question = -1;
                     newConnection.rTimer = new MyTimer(0, readSocket, newConnection);
-                    //connections.Add(newConnection);
+
+                    connections.Add(newConnection);
+
+
                     eventLogger.WriteEntry("connection made");
                     Console.WriteLine("Connected!");
 
